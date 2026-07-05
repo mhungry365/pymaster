@@ -1,24 +1,68 @@
 "use client";
 
-import { useState } from "react";
-import type { GameDefinition } from "@/data/games";
+import { useMemo, useState } from "react";
+import type { GameDefinition, GameDifficulty } from "@/data/games";
 
 type Props = {
   game: GameDefinition;
 };
 
+const difficultyOrder: GameDifficulty[] = [
+  "Beginner",
+  "Easy",
+  "Intermediate",
+  "Advanced",
+  "Pro",
+];
+
 export function LearningGame({ game }: Props) {
+  const [selectedDifficulty, setSelectedDifficulty] =
+    useState<GameDifficulty>("Beginner");
   const [levelIndex, setLevelIndex] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
   const [score, setScore] = useState(0);
 
-  const level = game.levels[levelIndex];
+  const availableDifficulties = useMemo(() => {
+    return difficultyOrder.filter((difficulty) =>
+      game.levels.some((level) => level.difficulty === difficulty),
+    );
+  }, [game.levels]);
+
+  const activeDifficulty = availableDifficulties.includes(selectedDifficulty)
+    ? selectedDifficulty
+    : availableDifficulties[0];
+
+  const levels = game.levels.filter(
+    (level) => level.difficulty === activeDifficulty,
+  );
+
+  const level = levels[levelIndex] ?? levels[0];
+
+  if (!level) {
+    return (
+      <div className="mx-auto max-w-3xl rounded-3xl border border-slate-200 bg-white p-8 text-slate-950">
+        <h1 className="text-3xl font-black">No levels found</h1>
+        <p className="mt-3 text-slate-600">
+          This game does not have levels yet. Please choose another game.
+        </p>
+      </div>
+    );
+  }
+
   const isCorrect = selected === level.correctAnswer;
-  const isLast = levelIndex === game.levels.length - 1;
+  const isLast = levelIndex === levels.length - 1;
+
+  function changeDifficulty(difficulty: GameDifficulty) {
+    setSelectedDifficulty(difficulty);
+    setLevelIndex(0);
+    setSelected(null);
+    setScore(0);
+  }
 
   function choose(option: string) {
     if (selected) return;
     setSelected(option);
+
     if (option === level.correctAnswer) {
       setScore((value) => value + level.xp);
     }
@@ -26,7 +70,7 @@ export function LearningGame({ game }: Props) {
 
   function next() {
     setSelected(null);
-    setLevelIndex((value) => Math.min(game.levels.length - 1, value + 1));
+    setLevelIndex((value) => Math.min(levels.length - 1, value + 1));
   }
 
   function restart() {
@@ -54,10 +98,28 @@ export function LearningGame({ game }: Props) {
           </div>
         </div>
 
+        <div className="mt-6 flex flex-wrap gap-2">
+          {availableDifficulties.map((difficulty) => (
+            <button
+              key={difficulty}
+              type="button"
+              onClick={() => changeDifficulty(difficulty)}
+              className={[
+                "rounded-full border px-4 py-2 text-sm font-bold transition",
+                selectedDifficulty === difficulty
+                  ? "border-cyan-300 bg-cyan-100 text-cyan-800"
+                  : "border-slate-200 bg-white text-slate-600 hover:bg-slate-50",
+              ].join(" ")}
+            >
+              {difficulty}
+            </button>
+          ))}
+        </div>
+
         <div className="mt-6 h-3 overflow-hidden rounded-full bg-slate-100">
           <div
             className="h-full rounded-full bg-cyan-400 transition-all"
-            style={{ width: `${((levelIndex + 1) / game.levels.length) * 100}%` }}
+            style={{ width: `${((levelIndex + 1) / levels.length) * 100}%` }}
           />
         </div>
       </div>
@@ -66,7 +128,7 @@ export function LearningGame({ game }: Props) {
         <div className="grid gap-6 lg:grid-cols-[1fr_320px]">
           <div>
             <p className="text-sm font-bold text-slate-500">
-              Level {levelIndex + 1} of {game.levels.length} • {level.difficulty}
+              {activeDifficulty} • Level {levelIndex + 1} of {levels.length}
             </p>
 
             <h2 className="mt-2 text-3xl font-black text-slate-950">
@@ -91,11 +153,22 @@ export function LearningGame({ game }: Props) {
                     onClick={() => choose(option)}
                     className={[
                       "rounded-2xl border p-4 text-left font-bold transition",
-                      !selected && "border-slate-200 bg-white hover:border-cyan-300 hover:bg-cyan-50",
-                      selected && correct && "border-emerald-300 bg-emerald-100 text-emerald-900",
-                      selected && active && !correct && "border-red-300 bg-red-100 text-red-900",
-                      selected && !active && !correct && "border-slate-200 bg-slate-50 text-slate-400",
-                    ].filter(Boolean).join(" ")}
+                      !selected &&
+                        "border-slate-200 bg-white hover:border-cyan-300 hover:bg-cyan-50",
+                      selected &&
+                        correct &&
+                        "border-emerald-300 bg-emerald-100 text-emerald-900",
+                      selected &&
+                        active &&
+                        !correct &&
+                        "border-red-300 bg-red-100 text-red-900",
+                      selected &&
+                        !active &&
+                        !correct &&
+                        "border-slate-200 bg-slate-50 text-slate-400",
+                    ]
+                      .filter(Boolean)
+                      .join(" ")}
                   >
                     {option}
                   </button>
@@ -125,7 +198,7 @@ export function LearningGame({ game }: Props) {
                       onClick={restart}
                       className="rounded-2xl bg-emerald-400 px-5 py-3 font-black text-slate-950 hover:bg-emerald-300"
                     >
-                      Play Again
+                      Replay {activeDifficulty}
                     </button>
                   )}
                 </div>
@@ -139,9 +212,13 @@ export function LearningGame({ game }: Props) {
               PyBuddy says
             </h3>
             <p className="mt-3 text-slate-700">
-              Don’t worry about memorising everything. Play the level, notice the pattern,
-              and Python will start making sense.
+              Start easy, then move up. Each level adds a tiny challenge so you
+              learn without feeling overwhelmed.
             </p>
+
+            <div className="mt-6 rounded-2xl bg-white/80 p-4 text-sm font-bold text-slate-700">
+              Current mode: {activeDifficulty}
+            </div>
           </aside>
         </div>
       </div>
