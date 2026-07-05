@@ -96,3 +96,20 @@ export type MiniChallenge = {
   checklist: string[];
   xpReward: number;
 };
+
+export type NoteCategory =
+  | "Basics"
+  | "Data Types"
+  | "Control Flow"
+  | "Functions";
+
+export type VisualNote = {
+  id: string;
+  title: string;
+  category: NoteCategory;
+  explanation: string;
+  syntaxExample: string;
+  visualExplanation: string;
+  commonMistake: string;
+  memoryTip: string;
+};
