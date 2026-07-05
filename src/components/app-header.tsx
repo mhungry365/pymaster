@@ -20,7 +20,7 @@ export function AppHeader() {
             Py
           </span>
           <span className="text-xl font-bold tracking-tight text-slate-950">
-            PyMaster
+            Py2Learn
           </span>
         </Link>
 

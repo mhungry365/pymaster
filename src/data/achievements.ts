@@ -18,7 +18,7 @@ export const achievements: Achievement[] = [
   {
     id: "first-lesson",
     title: "First Lesson Completed",
-    description: "Complete your first PyMaster lesson.",
+    description: "Complete your first Py2Learn lesson.",
     target: 1,
     getProgressValue: (progress) => progress.completedLessonSlugs.length,
   },
@@ -62,7 +62,7 @@ export const achievements: Achievement[] = [
   {
     id: "five-hundred-xp",
     title: "500 XP Earned",
-    description: "Earn 500 total XP across PyMaster.",
+    description: "Earn 500 total XP across Py2Learn.",
     target: 500,
     getProgressValue: (progress) => progress.totalXP,
   },

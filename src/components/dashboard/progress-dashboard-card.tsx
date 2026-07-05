@@ -24,7 +24,7 @@ export function ProgressDashboardCard({
             Local progress
           </p>
           <h2 className="mt-3 text-2xl font-semibold text-slate-950">
-            Your PyMaster stats
+            Your Py2Learn stats
           </h2>
           <p className="mt-3 max-w-2xl leading-7 text-slate-600">
             Progress is saved in this browser with localStorage. Later, this can

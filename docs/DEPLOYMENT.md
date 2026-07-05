@@ -1,14 +1,14 @@
-# PyMaster Deployment
+# Py2Learn Deployment
 
 ## Repository
 
-GitHub repo: https://github.com/mhungry365/pymaster
+GitHub repo: https://github.com/mhungry365/py2learn
 
 ## Vercel Deployment Steps
 
 1. Sign in to Vercel with the owner account.
 2. Choose **Add New Project**.
-3. Import the `mhungry365/pymaster` GitHub repository.
+3. Import the `mhungry365/py2learn` GitHub repository.
 4. Keep the default framework preset as **Next.js**.
 5. Use the default commands:
    - Install command: `npm install`

@@ -11,7 +11,7 @@ export const dailyChallenges: DailyChallenge[] = [
     id: "daily-print",
     title: "Print a welcome message",
     topic: "print()",
-    task: 'Write one print() line that shows "Welcome to PyMaster".',
+    task: 'Write one print() line that shows "Welcome to Py2Learn".',
     xpReward: 15,
   },
   {

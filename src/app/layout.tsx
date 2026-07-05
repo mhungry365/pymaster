@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "PyMaster",
+  title: "Py2Learn",
   description: "Learn Python by doing",
 };
 

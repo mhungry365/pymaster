@@ -26,7 +26,7 @@ export default function Home() {
         </h1>
 
         <p className="mx-auto mt-6 max-w-2xl text-lg text-slate-600">
-          PyMaster combines visual lessons, practice, projects, XP, streaks,
+          Py2Learn combines visual lessons, practice, projects, XP, streaks,
           achievements, and a playground to help beginners learn Python step by step.
         </p>
 
@@ -55,7 +55,7 @@ export default function Home() {
           >
             <h3 className="text-xl font-bold">{feature}</h3>
             <p className="mt-2 text-sm text-slate-500">
-              Built into the current PyMaster MVP and ready to expand.
+              Built into the current Py2Learn MVP and ready to expand.
             </p>
           </div>
         ))}

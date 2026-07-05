@@ -10,7 +10,7 @@ export default function ProfilePage() {
   return (
     <PageShell
       eyebrow="Profile"
-      title="Your local PyMaster progress"
+      title="Your local Py2Learn progress"
       description="Review XP, streaks, completed learning work, achievements, and local progress controls."
     >
       <ProgressOverview

@@ -10,7 +10,7 @@ export const playgroundExamples: PlaygroundExample[] = [
   {
     id: "print",
     label: "print()",
-    code: `print("Hello, PyMaster!")`,
+    code: `print("Hello, Py2Learn!")`,
     hint: "print() shows text in the output. Strings need quotation marks.",
     lessonSlug: "python-variables",
   },

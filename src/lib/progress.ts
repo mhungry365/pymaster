@@ -1,5 +1,5 @@
-const PROGRESS_STORAGE_KEY = "pymaster-progress";
-const PROGRESS_UPDATED_EVENT = "pymaster-progress-updated";
+const PROGRESS_STORAGE_KEY = "py2learn-progress";
+const PROGRESS_UPDATED_EVENT = "py2learn-progress-updated";
 
 export type ProgressState = {
   completedLessonSlugs: string[];

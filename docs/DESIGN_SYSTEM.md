@@ -1,6 +1,6 @@
-# PyMaster Design System
+# Py2Learn Design System
 
-PyMaster uses reusable UI components to keep the app consistent, scalable, and easy to maintain.
+Py2Learn uses reusable UI components to keep the app consistent, scalable, and easy to maintain.
 
 ## Principles
 
