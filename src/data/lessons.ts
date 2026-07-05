@@ -231,6 +231,239 @@ print(course.upper())`,
       "I can apply simple string methods like upper() and title().",
       "I can avoid mixing strings and numbers incorrectly.",
     ],
+    nextLessonSlug: "python-numbers",
+  },
+  {
+    slug: "python-numbers",
+    title: "Python Numbers",
+    module: "Python Basics",
+    difficulty: "Beginner",
+    estimatedTime: "16 min",
+    xp: 80,
+    description:
+      "Learn how Python uses numbers for counting, measuring, scoring, and calculations.",
+    learningObjectives: [
+      "Tell integers and decimals apart",
+      "Use arithmetic operators",
+      "Store calculation results in variables",
+      "Avoid turning math numbers into strings",
+    ],
+    realWorldExamples: [
+      "A fitness app stores steps = 8000.",
+      "A shop calculates total = price + tax.",
+      "A game updates health after a player takes damage.",
+    ],
+    sections: [
+      {
+        title: "Numbers are values Python can calculate with",
+        content: [
+          "Python has whole numbers like 7 and decimal numbers like 7.5.",
+          "You can add, subtract, multiply, and divide numbers, then store the result in a variable.",
+          "Numbers are different from strings. The number 5 can do math; the string \"5\" is text.",
+        ],
+        visual: {
+          title: "Numbers as calculator blocks",
+          description:
+            "Each number block can be combined with an operator to create a new value.",
+          label: "total",
+          value: "price + tax",
+        },
+      },
+    ],
+    commonMistakes: [
+      "Putting quotes around numbers when you want math, like \"10\" + \"5\".",
+      "Using commas in large numbers, like 1,000. Python reads that differently.",
+      "Forgetting that division with / usually produces a decimal result.",
+    ],
+    memoryTip:
+      "No quotes for math. If Python should calculate it, keep it as a number.",
+    codeExamples: [
+      {
+        title: "Add numbers",
+        code: `apples = 4
+oranges = 3
+total_fruit = apples + oranges
+
+print(total_fruit)`,
+      },
+      {
+        title: "Calculate a total",
+        code: `price = 12.5
+tax = 1.25
+total = price + tax
+
+print(f"Total: {total}")`,
+      },
+    ],
+    quizzes: [
+      {
+        question: "Which value is a number Python can use for math?",
+        options: [
+          { id: "a", label: '"12"' },
+          { id: "b", label: "12" },
+          { id: "c", label: '"twelve"' },
+          { id: "d", label: "print(12)" },
+        ],
+        correctOptionId: "b",
+        explanation:
+          "12 without quotes is a number. \"12\" is text that looks like a number.",
+      },
+      {
+        question: "What does total = 4 + 3 store?",
+        options: [
+          { id: "a", label: "4 + 3 as text" },
+          { id: "b", label: "7" },
+          { id: "c", label: "43" },
+          { id: "d", label: "Nothing" },
+        ],
+        correctOptionId: "b",
+        explanation:
+          "Python calculates the right side first, then stores the result 7 in total.",
+      },
+    ],
+    fillBlankChallenges: [
+      {
+        prompt: "Fill in the operator so the code prints 9.",
+        codeBeforeBlank: "score = 6 ",
+        codeAfterBlank: " 3\nprint(score)",
+        answer: "+",
+        hint: "Use the addition operator.",
+      },
+    ],
+    practiceTasks: [
+      {
+        title: "Calculate practice minutes",
+        prompt:
+          "Create variables for morning and evening practice minutes, add them, and print the daily total.",
+        checklist: [
+          "Create two number variables",
+          "Add them into a total variable",
+          "Print the total",
+          "Use an f-string for a friendly message",
+        ],
+      },
+    ],
+    summary: [
+      "I can use integers and decimals.",
+      "I can calculate with +, -, *, and /.",
+      "I can store calculation results in variables.",
+      "I know quoted numbers are strings, not math numbers.",
+    ],
+    nextLessonSlug: "python-booleans",
+  },
+  {
+    slug: "python-booleans",
+    title: "Python Booleans",
+    module: "Python Basics",
+    difficulty: "Beginner",
+    estimatedTime: "14 min",
+    xp: 75,
+    description:
+      "Learn how True and False values help Python make decisions.",
+    learningObjectives: [
+      "Recognize True and False boolean values",
+      "Create boolean variables",
+      "Read comparison results",
+      "Use booleans as decision signals",
+    ],
+    realWorldExamples: [
+      "A login form stores is_logged_in = True.",
+      "A task app checks task_complete before showing a badge.",
+      "A game stores has_key = False until the player finds one.",
+    ],
+    sections: [
+      {
+        title: "Booleans answer yes-or-no questions",
+        content: [
+          "A boolean can only be True or False.",
+          "Comparisons like score >= 10 produce boolean values.",
+          "Boolean variable names often start with words like is, has, or can because they sound like questions.",
+        ],
+        visual: {
+          title: "Boolean as a light switch",
+          description:
+            "A boolean is either on or off: True or False. There is no middle value.",
+          label: "is_complete",
+          value: "True",
+        },
+      },
+    ],
+    commonMistakes: [
+      "Writing true or false in lowercase. Python booleans are True and False.",
+      "Putting quotes around booleans, like \"True\". That creates a string.",
+      "Using = when you mean to compare with ==.",
+    ],
+    memoryTip:
+      "Booleans are capitalized answers: True means yes, False means no.",
+    codeExamples: [
+      {
+        title: "Store a boolean",
+        code: `lesson_complete = False
+
+print(lesson_complete)`,
+      },
+      {
+        title: "Create a boolean with comparison",
+        code: `score = 8
+passed = score >= 5
+
+print(passed)`,
+      },
+    ],
+    quizzes: [
+      {
+        question: "Which value is a Python boolean?",
+        options: [
+          { id: "a", label: '"True"' },
+          { id: "b", label: "true" },
+          { id: "c", label: "True" },
+          { id: "d", label: "yes" },
+        ],
+        correctOptionId: "c",
+        explanation:
+          "Python booleans are written as True and False with capital letters.",
+      },
+      {
+        question: "What does score >= 5 create?",
+        options: [
+          { id: "a", label: "A string" },
+          { id: "b", label: "A boolean" },
+          { id: "c", label: "A list" },
+          { id: "d", label: "A new function" },
+        ],
+        correctOptionId: "b",
+        explanation:
+          "Comparisons answer yes-or-no questions, so they produce booleans.",
+      },
+    ],
+    fillBlankChallenges: [
+      {
+        prompt: "Fill in the boolean value that means yes.",
+        codeBeforeBlank: "is_ready = ",
+        codeAfterBlank: "\nprint(is_ready)",
+        answer: "True",
+        hint: "Use the capitalized Python boolean.",
+      },
+    ],
+    practiceTasks: [
+      {
+        title: "Create a readiness flag",
+        prompt:
+          "Create a score variable, compare it to a passing number, and store the result in a boolean variable.",
+        checklist: [
+          "Create a number variable",
+          "Use a comparison like >= or ==",
+          "Store the comparison in a boolean variable",
+          "Print the boolean result",
+        ],
+      },
+    ],
+    summary: [
+      "I can recognize True and False.",
+      "I can create boolean variables.",
+      "I can use comparisons to produce booleans.",
+      "I know booleans are not strings.",
+    ],
     nextLessonSlug: "python-lists",
   },
   {
@@ -346,6 +579,355 @@ print(projects)`,
       "I can read list items with indexes.",
       "I know the first index is 0.",
       "I can use append() and len() with lists.",
+    ],
+    nextLessonSlug: "python-input",
+  },
+  {
+    slug: "python-input",
+    title: "Python Input",
+    module: "Python Basics",
+    difficulty: "Beginner",
+    estimatedTime: "16 min",
+    xp: 80,
+    description:
+      "Learn how input() lets a Python program ask the user for information.",
+    learningObjectives: [
+      "Use input() to ask a question",
+      "Store user responses in variables",
+      "Remember input() returns strings",
+      "Convert input when numbers are needed",
+    ],
+    realWorldExamples: [
+      "A quiz asks for the player’s answer.",
+      "A sign-up script asks for a username.",
+      "A calculator asks for numbers before calculating.",
+    ],
+    sections: [
+      {
+        title: "Input lets users talk to your program",
+        content: [
+          "input() pauses the program and waits for the user to type a response.",
+          "The response should usually be stored in a variable so the program can use it later.",
+          "input() always gives back a string, even if the user types a number.",
+        ],
+        visual: {
+          title: "Input as a question box",
+          description:
+            "The prompt asks a question. The typed answer comes back as text.",
+          label: "name",
+          value: 'input("Name? ")',
+        },
+      },
+    ],
+    commonMistakes: [
+      "Forgetting to store the result of input() in a variable.",
+      "Expecting input() to return a number automatically.",
+      "Writing a prompt without a space, which can make the typed answer look cramped.",
+    ],
+    memoryTip:
+      "input() always returns text first. Convert later if you need math.",
+    codeExamples: [
+      {
+        title: "Ask for a name",
+        code: `name = input("What is your name? ")
+
+print(f"Hello, {name}!")`,
+      },
+      {
+        title: "Convert input to a number",
+        code: `minutes_text = input("Minutes practiced? ")
+minutes = int(minutes_text)
+
+print(minutes + 10)`,
+      },
+    ],
+    quizzes: [
+      {
+        question: "What does input() return?",
+        options: [
+          { id: "a", label: "A string" },
+          { id: "b", label: "Always a number" },
+          { id: "c", label: "A list" },
+          { id: "d", label: "Nothing" },
+        ],
+        correctOptionId: "a",
+        explanation:
+          "input() returns what the user typed as a string.",
+      },
+      {
+        question: "Why might you use int(input(...))?",
+        options: [
+          { id: "a", label: "To make text uppercase" },
+          { id: "b", label: "To convert typed text into an integer" },
+          { id: "c", label: "To create a list" },
+          { id: "d", label: "To skip the user question" },
+        ],
+        correctOptionId: "b",
+        explanation:
+          "int() converts number-like text into an integer for math.",
+      },
+    ],
+    fillBlankChallenges: [
+      {
+        prompt: "Fill in the function that asks the user a question.",
+        codeBeforeBlank: "name = ",
+        codeAfterBlank: '("Name? ")\nprint(name)',
+        answer: "input",
+        hint: "Use the built-in function that reads typed text.",
+      },
+    ],
+    practiceTasks: [
+      {
+        title: "Ask and greet",
+        prompt:
+          "Ask the user for their name and favorite topic, then print a friendly sentence using both answers.",
+        checklist: [
+          "Use input() twice",
+          "Store both answers in variables",
+          "Use an f-string",
+          "Print a friendly message",
+        ],
+      },
+    ],
+    summary: [
+      "I can use input() to ask a question.",
+      "I can store user responses in variables.",
+      "I know input() returns strings.",
+      "I can convert input when I need numbers.",
+    ],
+    nextLessonSlug: "python-conditions",
+  },
+  {
+    slug: "python-conditions",
+    title: "Python Conditions",
+    module: "Python Basics",
+    difficulty: "Beginner",
+    estimatedTime: "20 min",
+    xp: 90,
+    description:
+      "Learn how if statements let Python choose what to do based on a condition.",
+    learningObjectives: [
+      "Write simple if statements",
+      "Use comparisons in conditions",
+      "Add else for another path",
+      "Indent conditional code correctly",
+    ],
+    realWorldExamples: [
+      "A quiz checks if an answer is correct.",
+      "A game checks if health is above zero.",
+      "A store applies free shipping if the total is high enough.",
+    ],
+    sections: [
+      {
+        title: "Conditions let code make choices",
+        content: [
+          "An if statement runs code only when its condition is True.",
+          "The condition comes after if and ends with a colon.",
+          "Indented lines belong to the if block. Python uses indentation to understand what should run.",
+        ],
+        visual: {
+          title: "Condition as a fork in the road",
+          description:
+            "If the condition is True, Python follows one path. Otherwise it can skip or follow else.",
+          label: "score >= 5",
+          value: "True path",
+        },
+      },
+    ],
+    commonMistakes: [
+      "Forgetting the colon after the condition.",
+      "Forgetting indentation inside the if block.",
+      "Using one equals sign when comparing. Use == for equality checks.",
+    ],
+    memoryTip:
+      "If asks a yes-or-no question. The indented code is what happens when the answer is yes.",
+    codeExamples: [
+      {
+        title: "Use if",
+        code: `score = 8
+
+if score >= 5:
+    print("You passed!")`,
+      },
+      {
+        title: "Use if and else",
+        code: `answer = "Python"
+
+if answer == "Python":
+    print("Correct")
+else:
+    print("Try again")`,
+      },
+    ],
+    quizzes: [
+      {
+        question: "What does an if statement need after the condition?",
+        options: [
+          { id: "a", label: "A comma" },
+          { id: "b", label: "A colon" },
+          { id: "c", label: "A quote" },
+          { id: "d", label: "A list" },
+        ],
+        correctOptionId: "b",
+        explanation:
+          "Python if statements use a colon before the indented block.",
+      },
+      {
+        question: "Which operator checks equality?",
+        options: [
+          { id: "a", label: "=" },
+          { id: "b", label: "==" },
+          { id: "c", label: "=>" },
+          { id: "d", label: "equals" },
+        ],
+        correctOptionId: "b",
+        explanation:
+          "== compares two values. = assigns a value to a variable.",
+      },
+    ],
+    fillBlankChallenges: [
+      {
+        prompt: "Fill in the missing keyword for the second path.",
+        codeBeforeBlank: 'answer = "Java"\nif answer == "Python":\n    print("Correct")\n',
+        codeAfterBlank: ':\n    print("Try again")',
+        answer: "else",
+        hint: "Use the keyword that runs when if is not true.",
+      },
+    ],
+    practiceTasks: [
+      {
+        title: "Check a quiz answer",
+        prompt:
+          "Create an answer variable. If it matches the correct answer, print Correct. Otherwise print Try again.",
+        checklist: [
+          "Create an answer variable",
+          "Use if with ==",
+          "Add an else block",
+          "Indent both blocks correctly",
+        ],
+      },
+    ],
+    summary: [
+      "I can write an if statement.",
+      "I can use comparisons in conditions.",
+      "I can add else for another path.",
+      "I know indentation matters in Python.",
+    ],
+    nextLessonSlug: "python-loops",
+  },
+  {
+    slug: "python-loops",
+    title: "Python Loops",
+    module: "Python Basics",
+    difficulty: "Beginner",
+    estimatedTime: "22 min",
+    xp: 95,
+    description:
+      "Learn how loops repeat code for each item in a sequence.",
+    learningObjectives: [
+      "Explain what a loop repeats",
+      "Write a for loop over a list",
+      "Use a loop variable",
+      "Indent loop code correctly",
+    ],
+    realWorldExamples: [
+      "A todo app prints every task in a list.",
+      "A scoreboard displays every player score.",
+      "A report processes every row of data.",
+    ],
+    sections: [
+      {
+        title: "Loops repeat work",
+        content: [
+          "A for loop runs the same block of code once for each item in a sequence.",
+          "The loop variable temporarily stores the current item.",
+          "Indented lines are the repeated steps. When the loop moves to the next item, those steps run again.",
+        ],
+        visual: {
+          title: "Loop as a conveyor belt",
+          description:
+            "Each item moves through the same station. Python repeats the indented code for each item.",
+          label: "for topic in topics",
+          value: "repeat block",
+        },
+      },
+    ],
+    commonMistakes: [
+      "Forgetting the colon after the for line.",
+      "Forgetting to indent the repeated code.",
+      "Using the list name and loop variable as if they are the same thing.",
+    ],
+    memoryTip:
+      "For each item in the list, do the indented steps.",
+    codeExamples: [
+      {
+        title: "Loop through topics",
+        code: `topics = ["variables", "strings", "loops"]
+
+for topic in topics:
+    print(topic)`,
+      },
+      {
+        title: "Build messages in a loop",
+        code: `learners = ["Ada", "Maya", "Sam"]
+
+for learner in learners:
+    print(f"Keep going, {learner}!")`,
+      },
+    ],
+    quizzes: [
+      {
+        question: "How many times does a for loop run over a list of 3 items?",
+        options: [
+          { id: "a", label: "0" },
+          { id: "b", label: "1" },
+          { id: "c", label: "3" },
+          { id: "d", label: "Forever" },
+        ],
+        correctOptionId: "c",
+        explanation:
+          "A for loop runs once for each item in the list.",
+      },
+      {
+        question: "What does the loop variable hold?",
+        options: [
+          { id: "a", label: "The current item" },
+          { id: "b", label: "The whole program" },
+          { id: "c", label: "Only the first item forever" },
+          { id: "d", label: "The number of loops" },
+        ],
+        correctOptionId: "a",
+        explanation:
+          "The loop variable changes each time and holds the current item.",
+      },
+    ],
+    fillBlankChallenges: [
+      {
+        prompt: "Fill in the keyword that starts the loop.",
+        codeBeforeBlank: "",
+        codeAfterBlank: ' topic in topics:\n    print(topic)',
+        answer: "for",
+        hint: "Use the keyword for repeating over items.",
+      },
+    ],
+    practiceTasks: [
+      {
+        title: "Print a study plan",
+        prompt:
+          "Create a list of three study topics and use a for loop to print one encouragement message for each topic.",
+        checklist: [
+          "Create a list of three strings",
+          "Write a for loop",
+          "Use the loop variable in a print statement",
+          "Indent the repeated line",
+        ],
+      },
+    ],
+    summary: [
+      "I can explain what a for loop repeats.",
+      "I can loop through a list.",
+      "I can use a loop variable.",
+      "I know the repeated code must be indented.",
     ],
   },
 ];
