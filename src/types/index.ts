@@ -26,27 +26,38 @@ export type PracticeTaskData = {
   checklist: string[];
 };
 
+export type LessonSection = {
+  title: string;
+  content: string[];
+  visual?: {
+    title: string;
+    description: string;
+    label: string;
+    value: string;
+  };
+};
+
+export type LessonCodeExample = {
+  title: string;
+  code: string;
+};
+
 export type Lesson = {
   slug: string;
   title: string;
+  module: string;
   difficulty: LessonDifficulty;
   estimatedTime: string;
-  xpReward: number;
-  explanation: string[];
-  visualNote: {
-    title: string;
-    description: string;
-    variableName: string;
-    variableValue: string;
-  };
-  codeExample: {
-    title: string;
-    code: string;
-  };
-  quiz: QuizQuestion;
-  fillBlank: FillBlankChallenge;
-  practiceTask: PracticeTaskData;
+  xp: number;
+  description: string;
+  learningObjectives: string[];
+  sections: LessonSection[];
+  codeExamples: LessonCodeExample[];
+  quizzes: QuizQuestion[];
+  fillBlankChallenges: FillBlankChallenge[];
+  practiceTasks: PracticeTaskData[];
   summary: string[];
+  nextLessonSlug?: string;
 };
 
 export type PracticeQuestionType =

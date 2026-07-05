@@ -18,7 +18,7 @@ export function LessonCompleteButton({
       </h2>
       <p className="mx-auto mt-3 max-w-2xl leading-7 text-emerald-100">
         {isComplete
-          ? `Great work. You earned ${xpReward} XP for learning how variables store and reuse values.`
+          ? `Great work. You earned ${xpReward} XP for finishing this lesson.`
           : "Mark the lesson complete when you have tried the quiz, filled the blank, and written your practice variables."}
       </p>
       <button

@@ -6,10 +6,18 @@ import { PracticeTask } from "@/components/lesson/practice-task";
 import { QuizCard } from "@/components/lesson/quiz-card";
 import { VisualNoteCard } from "@/components/lesson/visual-note-card";
 import { AppHeader } from "@/components/app-header";
-import { pythonVariablesLesson } from "@/data/lessons";
+import type { Lesson } from "@/types";
 
-export default function PythonVariablesLessonPage() {
-  const lesson = pythonVariablesLesson;
+type LessonPageProps = {
+  lesson: Lesson;
+  nextLesson?: Lesson;
+};
+
+export function LessonPage({ lesson, nextLesson }: LessonPageProps) {
+  const pairedPracticeCount = Math.max(
+    lesson.fillBlankChallenges.length,
+    lesson.practiceTasks.length,
+  );
 
   return (
     <main className="min-h-screen bg-slate-950 text-white">
@@ -19,31 +27,67 @@ export default function PythonVariablesLessonPage() {
           title={lesson.title}
           difficulty={lesson.difficulty}
           estimatedTime={lesson.estimatedTime}
-          xpReward={lesson.xpReward}
+          xpReward={lesson.xp}
         />
 
         <div className="mt-8 grid gap-8">
           <section className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 sm:p-8">
             <p className="text-sm font-semibold uppercase tracking-[0.16em] text-emerald-300">
-              Explanation
+              {lesson.module}
             </p>
             <h2 className="mt-3 text-2xl font-semibold text-white">
-              What is a variable?
+              What you will learn
             </h2>
-            <div className="mt-5 grid gap-4 text-base leading-8 text-slate-300">
-              {lesson.explanation.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
+            <p className="mt-3 max-w-3xl leading-7 text-slate-300">
+              {lesson.description}
+            </p>
+            <ul className="mt-5 grid gap-3 md:grid-cols-2">
+              {lesson.learningObjectives.map((objective) => (
+                <li key={objective} className="flex gap-3 text-sm text-slate-300">
+                  <span className="mt-1 h-2 w-2 rounded-full bg-emerald-300" />
+                  <span>{objective}</span>
+                </li>
               ))}
-            </div>
+            </ul>
           </section>
 
-          <VisualNoteCard {...lesson.visualNote} />
+          {lesson.sections.map((section) => (
+            <div key={section.title} className="grid gap-6">
+              <section className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 sm:p-8">
+                <p className="text-sm font-semibold uppercase tracking-[0.16em] text-emerald-300">
+                  Explanation
+                </p>
+                <h2 className="mt-3 text-2xl font-semibold text-white">
+                  {section.title}
+                </h2>
+                <div className="mt-5 grid gap-4 text-base leading-8 text-slate-300">
+                  {section.content.map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
+                </div>
+              </section>
+
+              {section.visual ? (
+                <VisualNoteCard
+                  title={section.visual.title}
+                  description={section.visual.description}
+                  variableName={section.visual.label}
+                  variableValue={section.visual.value}
+                  labelCaption="Name"
+                  valueCaption="Stored value"
+                />
+              ) : null}
+            </div>
+          ))}
 
           <div className="grid gap-4">
-            <CodeBlock
-              title={lesson.codeExample.title}
-              code={lesson.codeExample.code}
-            />
+            {lesson.codeExamples.map((example) => (
+              <CodeBlock
+                key={example.title}
+                title={example.title}
+                code={example.code}
+              />
+            ))}
             <div className="rounded-3xl border border-emerald-300/20 bg-emerald-300/10 p-5 sm:flex sm:items-center sm:justify-between sm:gap-6">
               <div>
                 <h2 className="text-xl font-semibold text-white">
@@ -63,12 +107,26 @@ export default function PythonVariablesLessonPage() {
             </div>
           </div>
 
-          <QuizCard quiz={lesson.quiz} />
+          {lesson.quizzes.map((quiz) => (
+            <QuizCard key={quiz.question} quiz={quiz} />
+          ))}
 
-          <PracticeTask
-            fillBlank={lesson.fillBlank}
-            task={lesson.practiceTask}
-          />
+          {Array.from({ length: pairedPracticeCount }).map((_, index) => {
+            const fillBlank = lesson.fillBlankChallenges[index];
+            const task = lesson.practiceTasks[index];
+
+            if (!fillBlank || !task) {
+              return null;
+            }
+
+            return (
+              <PracticeTask
+                key={`${fillBlank.prompt}-${task.title}`}
+                fillBlank={fillBlank}
+                task={task}
+              />
+            );
+          })}
 
           <section className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 sm:p-8">
             <p className="text-sm font-semibold uppercase tracking-[0.16em] text-emerald-300">
@@ -87,24 +145,25 @@ export default function PythonVariablesLessonPage() {
             </ul>
           </section>
 
-          <LessonCompleteButton xpReward={lesson.xpReward} />
+          <LessonCompleteButton xpReward={lesson.xp} />
 
           <section className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 sm:p-8">
             <p className="text-sm font-semibold uppercase tracking-[0.16em] text-slate-400">
               Up next
             </p>
             <h2 className="mt-3 text-2xl font-semibold text-white">
-              Next lesson coming soon
+              {nextLesson ? nextLesson.title : "Next lesson coming soon"}
             </h2>
             <p className="mt-3 max-w-2xl leading-7 text-slate-300">
-              The next Python Basics lesson will build on variables with more
-              practice around strings, numbers, and simple expressions.
+              {nextLesson
+                ? nextLesson.description
+                : "More Python Basics lessons are on the way. Review the curriculum to choose what to practice next."}
             </p>
             <Link
-              href="/curriculum"
+              href={nextLesson ? `/lessons/${nextLesson.slug}` : "/curriculum"}
               className="mt-6 inline-flex h-12 items-center justify-center rounded-full border border-white/10 px-6 text-sm font-semibold text-white transition hover:border-emerald-300/50 hover:bg-white/5"
             >
-              Back to Curriculum
+              {nextLesson ? "Open Next Lesson" : "Back to Curriculum"}
             </Link>
           </section>
         </div>

@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { ContentCard } from "@/components/content-card";
 import { PageShell } from "@/components/page-shell";
+import { getLessonBySlug } from "@/data/lessons";
+
+const currentLesson = getLessonBySlug("python-variables");
 
 const quickActions = [
   {
@@ -13,7 +16,7 @@ const quickActions = [
   {
     title: "View Curriculum",
     description:
-      "See where Python Variables fits in the larger beginner learning path.",
+      "See where your current lesson fits in the larger beginner learning path.",
     label: "Roadmap",
     href: "/curriculum",
   },
@@ -33,39 +36,40 @@ export default function DashboardPage() {
       title="Your Python learning home"
       description="Track your momentum, jump back into lessons, and keep the next useful action close."
     >
-      <section className="rounded-3xl border border-emerald-300/20 bg-emerald-300/10 p-6 sm:p-8">
-        <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-center">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-emerald-200">
-              Current lesson
-            </p>
-            <h2 className="mt-3 text-3xl font-bold tracking-tight text-white">
-              Python Variables
-            </h2>
-            <p className="mt-3 max-w-2xl leading-7 text-emerald-100">
-              Learn how Python stores values with readable names, then try the
-              same ideas in the playground.
-            </p>
-            <div className="mt-5 flex flex-wrap gap-3 text-sm text-emerald-100">
-              <span className="rounded-full border border-emerald-300/30 px-4 py-2">
-                Beginner
-              </span>
-              <span className="rounded-full border border-emerald-300/30 px-4 py-2">
-                10 min
-              </span>
-              <span className="rounded-full border border-emerald-300/30 px-4 py-2">
-                50 XP
-              </span>
+      {currentLesson ? (
+        <section className="rounded-3xl border border-emerald-300/20 bg-emerald-300/10 p-6 sm:p-8">
+          <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-center">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.16em] text-emerald-200">
+                Current lesson
+              </p>
+              <h2 className="mt-3 text-3xl font-bold tracking-tight text-white">
+                {currentLesson.title}
+              </h2>
+              <p className="mt-3 max-w-2xl leading-7 text-emerald-100">
+                {currentLesson.description}
+              </p>
+              <div className="mt-5 flex flex-wrap gap-3 text-sm text-emerald-100">
+                <span className="rounded-full border border-emerald-300/30 px-4 py-2">
+                  {currentLesson.difficulty}
+                </span>
+                <span className="rounded-full border border-emerald-300/30 px-4 py-2">
+                  {currentLesson.estimatedTime}
+                </span>
+                <span className="rounded-full border border-emerald-300/30 px-4 py-2">
+                  {currentLesson.xp} XP
+                </span>
+              </div>
             </div>
+            <Link
+              href={`/lessons/${currentLesson.slug}`}
+              className="inline-flex h-12 items-center justify-center rounded-full bg-emerald-400 px-6 text-sm font-semibold text-slate-950 transition hover:bg-emerald-300"
+            >
+              Start / Continue
+            </Link>
           </div>
-          <Link
-            href="/lessons/python-variables"
-            className="inline-flex h-12 items-center justify-center rounded-full bg-emerald-400 px-6 text-sm font-semibold text-slate-950 transition hover:bg-emerald-300"
-          >
-            Start / Continue
-          </Link>
-        </div>
-      </section>
+        </section>
+      ) : null}
 
       <div className="mt-6 grid gap-4 md:grid-cols-3">
         {quickActions.map((action) => (
