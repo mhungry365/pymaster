@@ -1,36 +1,56 @@
+import { AnimatedCodeStep } from "@/components/lesson/AnimatedCodeStep";
+import { CommonMistakeCard } from "@/components/lesson/CommonMistakeCard";
+import { ConceptFlow } from "@/components/lesson/ConceptFlow";
+import { LearningChecklist } from "@/components/lesson/LearningChecklist";
+import { MemoryCard } from "@/components/lesson/MemoryCard";
+import { VariableBox } from "@/components/lesson/VariableBox";
 import { LessonSection } from "@/types/lesson";
 
 export function renderSection(section: LessonSection) {
   switch (section.type) {
-    case "hero":
-      return <div>Hero Section</div>;
-
-    case "text":
-      return <div>Text Section</div>;
-
     case "memory":
-      return <div>Memory Section</div>;
+      return <MemoryCard>{String(section.content ?? "")}</MemoryCard>;
 
-    case "variable-box":
-      return <div>Variable Box</div>;
+    case "variable-box": {
+      const data = section.content as {
+        name: string;
+        value: string;
+        typeLabel: string;
+      };
+
+      return (
+        <VariableBox
+          name={data.name}
+          value={data.value}
+          typeLabel={data.typeLabel}
+        />
+      );
+    }
 
     case "concept-flow":
-      return <div>Concept Flow</div>;
+      return <ConceptFlow steps={(section.content as string[]) ?? []} />;
 
     case "animated-code":
-      return <div>Animated Code</div>;
+      return <AnimatedCodeStep steps={(section.content as { code: string; explanation: string }[]) ?? []} />;
 
-    case "common-mistake":
-      return <div>Common Mistake</div>;
+    case "common-mistake": {
+      const data = section.content as {
+        wrongCode: string;
+        correctCode: string;
+        explanation: string;
+      };
 
-    case "quiz":
-      return <div>Quiz</div>;
-
-    case "practice":
-      return <div>Practice</div>;
+      return (
+        <CommonMistakeCard
+          wrongCode={data.wrongCode}
+          correctCode={data.correctCode}
+          explanation={data.explanation}
+        />
+      );
+    }
 
     case "summary":
-      return <div>Summary</div>;
+      return <LearningChecklist items={(section.content as string[]) ?? []} />;
 
     default:
       return null;
