@@ -8,16 +8,18 @@ import type {
 type PracticeQuestionCardProps = {
   question: MultipleChoicePracticeQuestion | CodeReadingPracticeQuestion;
   selectedOptionId: string | undefined;
+  isCompleted: boolean;
   onSelectAnswer: (questionId: string, optionId: string, isCorrect: boolean) => void;
 };
 
 export function PracticeQuestionCard({
   question,
   selectedOptionId,
+  isCompleted,
   onSelectAnswer,
 }: PracticeQuestionCardProps) {
-  const hasAnswered = selectedOptionId !== undefined;
-  const isCorrect = selectedOptionId === question.correctOptionId;
+  const hasAnswered = selectedOptionId !== undefined || isCompleted;
+  const isCorrect = selectedOptionId === question.correctOptionId || isCompleted;
 
   return (
     <section className="rounded-3xl border border-white/10 bg-white/[0.04] p-6">
@@ -33,7 +35,7 @@ export function PracticeQuestionCard({
           </h2>
         </div>
         <span className="rounded-full border border-emerald-300/30 bg-emerald-300/10 px-4 py-2 text-sm font-semibold text-emerald-200">
-          {question.xpReward} XP
+          {isCompleted ? "Completed" : `${question.xpReward} XP`}
         </span>
       </div>
 
@@ -80,7 +82,9 @@ export function PracticeQuestionCard({
               : "border-amber-300/30 bg-amber-300/10 text-amber-100"
           }`}
         >
-          <p className="font-semibold">{isCorrect ? "Correct" : "Not quite"}</p>
+          <p className="font-semibold">
+            {isCorrect ? "Correct" : "Not quite"}
+          </p>
           <p className="mt-1">{question.explanation}</p>
         </div>
       ) : null}

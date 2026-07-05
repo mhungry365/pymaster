@@ -29,7 +29,7 @@ export function ChallengeCard({
           </h2>
         </div>
         <span className="rounded-full border border-emerald-300/30 bg-slate-950/50 px-4 py-2 text-sm font-semibold text-emerald-100">
-          {challenge.xpReward} XP
+          {isComplete ? "Completed" : `${challenge.xpReward} XP`}
         </span>
       </div>
 

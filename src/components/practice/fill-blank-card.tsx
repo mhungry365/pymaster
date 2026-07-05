@@ -5,17 +5,19 @@ import type { FillBlankPracticeQuestion } from "@/types";
 type FillBlankCardProps = {
   question: FillBlankPracticeQuestion;
   answer: string | undefined;
+  isCompleted: boolean;
   onChangeAnswer: (questionId: string, answer: string, isCorrect: boolean) => void;
 };
 
 export function FillBlankCard({
   question,
   answer = "",
+  isCompleted,
   onChangeAnswer,
 }: FillBlankCardProps) {
   const normalizedAnswer = answer.trim();
-  const hasAnswered = normalizedAnswer.length > 0;
-  const isCorrect = normalizedAnswer === question.answer;
+  const hasAnswered = normalizedAnswer.length > 0 || isCompleted;
+  const isCorrect = normalizedAnswer === question.answer || isCompleted;
 
   return (
     <section className="rounded-3xl border border-white/10 bg-white/[0.04] p-6">
@@ -29,7 +31,7 @@ export function FillBlankCard({
           </h2>
         </div>
         <span className="rounded-full border border-emerald-300/30 bg-emerald-300/10 px-4 py-2 text-sm font-semibold text-emerald-200">
-          {question.xpReward} XP
+          {isCompleted ? "Completed" : `${question.xpReward} XP`}
         </span>
       </div>
 
@@ -63,7 +65,11 @@ export function FillBlankCard({
         }`}
       >
         <p className="font-semibold">
-          {!hasAnswered ? "Hint" : isCorrect ? "Correct" : "Keep going"}
+          {!hasAnswered
+            ? "Hint"
+            : isCorrect
+              ? "Correct"
+              : "Keep going"}
         </p>
         <p className="mt-1">
           {!hasAnswered ? question.hint : question.explanation}
