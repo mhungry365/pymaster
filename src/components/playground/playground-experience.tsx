@@ -1,10 +1,12 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import { CodeEditor } from "@/components/playground/code-editor";
 import { ExampleSelector } from "@/components/playground/example-selector";
 import { OutputPanel } from "@/components/playground/output-panel";
 import { playgroundExamples } from "@/data/playground-examples";
+import { simulatePython } from "@/lib/simulated-python";
 
 export function PlaygroundExperience() {
   const [selectedExampleId, setSelectedExampleId] = useState(
@@ -18,6 +20,8 @@ export function PlaygroundExperience() {
   );
   const [code, setCode] = useState(selectedExample.code);
   const [output, setOutput] = useState("");
+  const [explanation, setExplanation] = useState("");
+  const [isError, setIsError] = useState(false);
   const [hasRun, setHasRun] = useState(false);
 
   function handleSelectExample(exampleId: string) {
@@ -28,23 +32,25 @@ export function PlaygroundExperience() {
     setSelectedExampleId(nextExample.id);
     setCode(nextExample.code);
     setOutput("");
+    setExplanation("");
+    setIsError(false);
     setHasRun(false);
   }
 
   function handleRunCode() {
-    const trimmedCode = code.trim();
+    const result = simulatePython(code);
 
-    setOutput(
-      trimmedCode.length > 0
-        ? selectedExample.output
-        : "Nothing to run yet. Try choosing an example or typing a print() statement.",
-    );
+    setOutput(result.output);
+    setExplanation(result.explanation);
+    setIsError(Boolean(result.isError));
     setHasRun(true);
   }
 
   function handleReset() {
     setCode(selectedExample.code);
     setOutput("");
+    setExplanation("");
+    setIsError(false);
     setHasRun(false);
   }
 
@@ -79,7 +85,12 @@ export function PlaygroundExperience() {
       </div>
 
       <div className="grid gap-5 content-start">
-        <OutputPanel output={output} hasRun={hasRun} />
+        <OutputPanel
+          output={output}
+          explanation={explanation}
+          hasRun={hasRun}
+          isError={isError}
+        />
         <section className="rounded-3xl border border-white/10 bg-white/[0.04] p-6">
           <p className="text-sm font-semibold uppercase tracking-[0.16em] text-emerald-300">
             Beginner Hint
@@ -90,10 +101,15 @@ export function PlaygroundExperience() {
           <p className="mt-3 leading-7 text-slate-300">
             {selectedExample.hint}
           </p>
+          <Link
+            href={`/lessons/${selectedExample.lessonSlug}`}
+            className="mt-5 inline-flex h-11 items-center justify-center rounded-full border border-emerald-300/30 px-5 text-sm font-semibold text-emerald-100 transition hover:bg-emerald-300/10"
+          >
+            Open related lesson
+          </Link>
           <div className="mt-5 rounded-2xl border border-white/10 bg-slate-950/60 p-4 text-sm leading-6 text-slate-400">
-            This playground uses simulated output for now. It is designed for
-            reading, editing, and predicting Python behavior before real code
-            execution is added.
+            This is simulated output for now. Real Python execution coming
+            later.
           </div>
         </section>
       </div>
