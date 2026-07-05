@@ -1,3 +1,5 @@
+import { AppHeader } from "@/components/app-header";
+
 const features = [
   {
     title: "Interactive Lessons",
@@ -24,20 +26,9 @@ const features = [
 export default function Home() {
   return (
     <main className="min-h-screen bg-slate-950 text-white">
-      <section className="mx-auto flex min-h-screen w-full max-w-7xl flex-col px-6 py-8 sm:px-8 lg:px-12">
-        <nav className="flex items-center justify-between">
-          <a href="#" className="text-xl font-bold tracking-tight">
-            PyMaster
-          </a>
-          <a
-            href="#curriculum"
-            className="rounded-full border border-white/15 px-4 py-2 text-sm font-medium text-slate-200 transition hover:border-emerald-300/60 hover:text-white"
-          >
-            Curriculum
-          </a>
-        </nav>
-
-        <div className="grid flex-1 items-center gap-12 py-16 lg:grid-cols-[1.05fr_0.95fr] lg:py-20">
+      <AppHeader />
+      <section className="mx-auto flex w-full max-w-7xl flex-col px-6 py-12 sm:px-8 lg:px-12">
+        <div className="grid min-h-[72vh] flex-1 items-center gap-12 py-10 lg:grid-cols-[1.05fr_0.95fr] lg:py-16">
           <div className="max-w-3xl">
             <div className="mb-6 inline-flex rounded-full border border-emerald-300/20 bg-emerald-300/10 px-4 py-2 text-sm font-medium text-emerald-200">
               Interactive Python learning
@@ -55,13 +46,13 @@ export default function Home() {
 
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <a
-                href="#start"
+                href="/dashboard"
                 className="inline-flex h-12 items-center justify-center rounded-full bg-emerald-400 px-6 text-sm font-semibold text-slate-950 shadow-lg shadow-emerald-950/40 transition hover:bg-emerald-300"
               >
                 Start Learning
               </a>
               <a
-                href="#curriculum"
+                href="/curriculum"
                 className="inline-flex h-12 items-center justify-center rounded-full border border-white/15 px-6 text-sm font-semibold text-white transition hover:border-emerald-300/60 hover:bg-white/5"
               >
                 View Curriculum
