@@ -113,3 +113,19 @@ export type VisualNote = {
   commonMistake: string;
   memoryTip: string;
 };
+
+export type ProjectCategory = "Beginner" | "Data" | "API" | "App";
+
+export type ProjectDifficulty = "Beginner" | "Intermediate";
+
+export type PythonProject = {
+  id: string;
+  title: string;
+  category: ProjectCategory;
+  difficulty: ProjectDifficulty;
+  estimatedTime: string;
+  skillsLearned: string[];
+  description: string;
+  buildSteps: string[];
+  xpReward: number;
+};

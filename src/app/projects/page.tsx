@@ -1,39 +1,14 @@
-import { ContentCard } from "@/components/content-card";
 import { PageShell } from "@/components/page-shell";
-
-const projects = [
-  {
-    title: "Tip Calculator",
-    description:
-      "Use variables and arithmetic to split a bill and format a friendly answer.",
-    label: "Starter",
-  },
-  {
-    title: "Quiz Game",
-    description:
-      "Combine input, conditionals, and scoring into a small command-line game.",
-    label: "Beginner",
-  },
-  {
-    title: "Habit Tracker",
-    description:
-      "Store daily progress and summarize your streak with Python data structures.",
-    label: "Project",
-  },
-];
+import { ProjectLibraryGrid } from "@/components/projects/project-library-grid";
 
 export default function ProjectsPage() {
   return (
     <PageShell
       eyebrow="Projects"
-      title="Learn by shipping small builds"
-      description="Projects connect lessons to practical outcomes, so every concept has somewhere useful to go."
+      title="Beginner Python project library"
+      description="Choose small, practical builds that turn Python basics into calculator tools, games, dashboards, and simple apps."
     >
-      <div className="grid gap-4 md:grid-cols-3">
-        {projects.map((project) => (
-          <ContentCard key={project.title} {...project} />
-        ))}
-      </div>
+      <ProjectLibraryGrid />
     </PageShell>
   );
 }
