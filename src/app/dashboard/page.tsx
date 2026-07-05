@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { AchievementsGrid } from "@/components/achievements/achievements-grid";
+import { DailyChallengeCard } from "@/components/dashboard/daily-challenge-card";
 import { ProgressDashboardCard } from "@/components/dashboard/progress-dashboard-card";
 import { ContentCard } from "@/components/content-card";
 import { PageShell } from "@/components/page-shell";
@@ -73,6 +74,8 @@ export default function DashboardPage() {
           </div>
         </section>
       ) : null}
+
+      <DailyChallengeCard />
 
       <ProgressDashboardCard totalLessons={totalLessons} />
 

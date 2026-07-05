@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import {
   PROGRESS_UPDATED_EVENT,
+  completeDailyChallenge,
   completeLesson,
   completePracticeQuestion,
   completeProject,
@@ -10,7 +11,6 @@ import {
   getTotalXP,
   isLessonCompleted,
   resetProgress,
-  updateStreak,
   type ProgressState,
 } from "@/lib/progress";
 
@@ -24,7 +24,6 @@ export function useProgress() {
   useEffect(() => {
     window.addEventListener(PROGRESS_UPDATED_EVENT, refreshProgress);
     window.addEventListener("storage", refreshProgress);
-    updateStreak();
 
     return () => {
       window.removeEventListener(PROGRESS_UPDATED_EVENT, refreshProgress);
@@ -40,9 +39,6 @@ export function useProgress() {
       },
       isLessonCompleted,
       getTotalXP,
-      updateStreak: () => {
-        setProgress(updateStreak());
-      },
       resetProgress: () => {
         setProgress(resetProgress());
       },
@@ -51,6 +47,9 @@ export function useProgress() {
       },
       completeProject: (id: string, xp: number) => {
         setProgress(completeProject(id, xp));
+      },
+      completeDailyChallenge: (id: string, xp: number, date?: string) => {
+        setProgress(completeDailyChallenge(id, xp, date));
       },
     }),
     [progress],

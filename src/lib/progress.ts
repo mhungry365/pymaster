@@ -8,6 +8,7 @@ export type ProgressState = {
   lastActiveDate: string | null;
   completedPracticeQuestionIds: string[];
   completedProjectIds: string[];
+  completedDailyChallenges: Record<string, string>;
 };
 
 const defaultProgress: ProgressState = {
@@ -17,13 +18,14 @@ const defaultProgress: ProgressState = {
   lastActiveDate: null,
   completedPracticeQuestionIds: [],
   completedProjectIds: [],
+  completedDailyChallenges: {},
 };
 
 function canUseStorage() {
   return typeof window !== "undefined" && Boolean(window.localStorage);
 }
 
-function getTodayKey() {
+export function getTodayKey() {
   return new Date().toISOString().slice(0, 10);
 }
 
@@ -93,11 +95,13 @@ export function updateStreak() {
 }
 
 export function completeLesson(slug: string, xp: number) {
-  const progress = updateStreak();
+  const currentProgress = getProgress();
 
-  if (progress.completedLessonSlugs.includes(slug)) {
-    return progress;
+  if (currentProgress.completedLessonSlugs.includes(slug)) {
+    return currentProgress;
   }
+
+  const progress = updateStreak();
 
   return saveProgress({
     ...progress,
@@ -119,11 +123,13 @@ export function resetProgress() {
 }
 
 export function completePracticeQuestion(id: string, xp: number) {
-  const progress = updateStreak();
+  const currentProgress = getProgress();
 
-  if (progress.completedPracticeQuestionIds.includes(id)) {
-    return progress;
+  if (currentProgress.completedPracticeQuestionIds.includes(id)) {
+    return currentProgress;
   }
+
+  const progress = updateStreak();
 
   return saveProgress({
     ...progress,
@@ -136,17 +142,46 @@ export function completePracticeQuestion(id: string, xp: number) {
 }
 
 export function completeProject(id: string, xp: number) {
-  const progress = updateStreak();
+  const currentProgress = getProgress();
 
-  if (progress.completedProjectIds.includes(id)) {
-    return progress;
+  if (currentProgress.completedProjectIds.includes(id)) {
+    return currentProgress;
   }
+
+  const progress = updateStreak();
 
   return saveProgress({
     ...progress,
     completedProjectIds: [...progress.completedProjectIds, id],
     totalXP: progress.totalXP + xp,
   });
+}
+
+export function completeDailyChallenge(
+  id: string,
+  xp: number,
+  date = getTodayKey(),
+) {
+  const currentProgress = getProgress();
+
+  if (currentProgress.completedDailyChallenges[date]) {
+    return currentProgress;
+  }
+
+  const progress = updateStreak();
+
+  return saveProgress({
+    ...progress,
+    completedDailyChallenges: {
+      ...progress.completedDailyChallenges,
+      [date]: id,
+    },
+    totalXP: progress.totalXP + xp,
+  });
+}
+
+export function isDailyChallengeCompleted(date = getTodayKey()) {
+  return Boolean(getProgress().completedDailyChallenges[date]);
 }
 
 export { PROGRESS_UPDATED_EVENT };
