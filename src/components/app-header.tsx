@@ -7,6 +7,7 @@ const navLinks = [
   { href: "/practice", label: "Practice" },
   { href: "/projects", label: "Projects" },
   { href: "/notes", label: "Notes" },
+  { href: "/profile", label: "Profile" },
 ];
 
 export function AppHeader() {
