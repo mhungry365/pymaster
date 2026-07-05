@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import type { GameDefinition, GameDifficulty } from "@/data/games";
 
@@ -163,12 +164,12 @@ export function LearningGame({ game }: Props) {
             Play Again with New Questions
           </button>
 
-          <a
+          <Link
             href="/games"
             className="rounded-2xl border border-slate-200 px-6 py-3 font-black text-slate-700 hover:bg-slate-50"
           >
             Back to Games
-          </a>
+          </Link>
         </div>
       </div>
     );
