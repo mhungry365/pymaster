@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { AchievementsGrid } from "@/components/achievements/achievements-grid";
 import { ProgressDashboardCard } from "@/components/dashboard/progress-dashboard-card";
 import { ContentCard } from "@/components/content-card";
 import { PageShell } from "@/components/page-shell";
@@ -74,6 +75,8 @@ export default function DashboardPage() {
       ) : null}
 
       <ProgressDashboardCard totalLessons={totalLessons} />
+
+      <AchievementsGrid />
 
       <div className="mt-6 grid gap-4 md:grid-cols-3">
         {quickActions.map((action) => (
