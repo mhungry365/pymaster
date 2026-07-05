@@ -10,7 +10,7 @@ export function AchievementCard({ achievement }: AchievementCardProps) {
       className={`rounded-3xl border p-5 transition ${
         achievement.isUnlocked
           ? "border-emerald-300/40 bg-emerald-300/10"
-          : "border-white/10 bg-white/[0.04]"
+          : "border-slate-200 bg-white"
       }`}
     >
       <div className="flex items-start justify-between gap-4">
@@ -18,7 +18,7 @@ export function AchievementCard({ achievement }: AchievementCardProps) {
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-emerald-300">
             {achievement.isUnlocked ? "Unlocked" : "Locked"}
           </p>
-          <h3 className="mt-3 text-xl font-semibold text-white">
+          <h3 className="mt-3 text-xl font-semibold text-slate-950">
             {achievement.title}
           </h3>
         </div>
@@ -26,26 +26,26 @@ export function AchievementCard({ achievement }: AchievementCardProps) {
           className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border text-lg font-black ${
             achievement.isUnlocked
               ? "border-emerald-300/40 bg-emerald-400 text-slate-950"
-              : "border-white/10 bg-slate-950/60 text-slate-500"
+              : "border-slate-200 bg-slate-100/60 text-slate-500"
           }`}
         >
           {achievement.isUnlocked ? "✓" : "•"}
         </span>
       </div>
 
-      <p className="mt-3 text-sm leading-6 text-slate-300">
+      <p className="mt-3 text-sm leading-6 text-slate-600">
         {achievement.description}
       </p>
 
       <div className="mt-5">
-        <div className="mb-2 flex items-center justify-between text-xs font-semibold uppercase tracking-[0.14em] text-slate-400">
+        <div className="mb-2 flex items-center justify-between text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">
           <span>Progress</span>
           <span>
             {Math.min(achievement.progressValue, achievement.target)}/
             {achievement.target}
           </span>
         </div>
-        <div className="h-2 overflow-hidden rounded-full bg-slate-950">
+        <div className="h-2 overflow-hidden rounded-full bg-slate-100">
           <div
             className="h-full rounded-full bg-emerald-400 transition-all"
             style={{ width: `${achievement.progressPercent}%` }}

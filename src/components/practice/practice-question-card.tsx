@@ -22,7 +22,7 @@ export function PracticeQuestionCard({
   const isCorrect = selectedOptionId === question.correctOptionId || isCompleted;
 
   return (
-    <section className="rounded-3xl border border-white/10 bg-white/[0.04] p-6">
+    <section className="rounded-3xl border border-slate-200 bg-white p-6">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <p className="text-sm font-semibold uppercase tracking-[0.16em] text-emerald-300">
@@ -30,7 +30,7 @@ export function PracticeQuestionCard({
               ? "Code reading"
               : "Multiple choice"}
           </p>
-          <h2 className="mt-3 text-2xl font-semibold text-white">
+          <h2 className="mt-3 text-2xl font-semibold text-slate-950">
             {question.title}
           </h2>
         </div>
@@ -39,10 +39,10 @@ export function PracticeQuestionCard({
         </span>
       </div>
 
-      <p className="mt-4 leading-7 text-slate-300">{question.prompt}</p>
+      <p className="mt-4 leading-7 text-slate-600">{question.prompt}</p>
 
       {question.type === "code-reading" ? (
-        <pre className="mt-5 overflow-x-auto rounded-2xl bg-slate-950 p-5 text-sm leading-7 text-slate-200">
+        <pre className="mt-5 overflow-x-auto rounded-2xl bg-slate-100 p-5 text-sm leading-7 text-slate-200">
           <code>{question.code}</code>
         </pre>
       ) : null}
@@ -64,8 +64,8 @@ export function PracticeQuestionCard({
               }
               className={`rounded-2xl border px-4 py-3 text-left text-sm font-medium transition ${
                 isSelected
-                  ? "border-emerald-300 bg-emerald-300/10 text-white"
-                  : "border-white/10 bg-slate-950/50 text-slate-300 hover:border-emerald-300/40 hover:text-white"
+                  ? "border-emerald-300 bg-emerald-300/10 text-slate-950"
+                  : "border-slate-200 bg-slate-100/50 text-slate-600 hover:border-emerald-300/40 hover:text-slate-950"
               }`}
             >
               {option.label}

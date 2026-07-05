@@ -13,7 +13,7 @@ export function MistakeAndMemorySection({
         <p className="text-sm font-semibold uppercase tracking-[0.16em] text-amber-200">
           Common Mistake
         </p>
-        <h2 className="mt-3 text-2xl font-bold text-white">
+        <h2 className="mt-3 text-2xl font-bold text-slate-950">
           Watch out for these
         </h2>
         <ul className="mt-5 grid gap-3">
@@ -30,7 +30,7 @@ export function MistakeAndMemorySection({
         <p className="text-sm font-semibold uppercase tracking-[0.16em] text-emerald-200">
           Memory Tip
         </p>
-        <h2 className="mt-3 text-2xl font-bold text-white">
+        <h2 className="mt-3 text-2xl font-bold text-slate-950">
           Keep this in mind
         </h2>
         <p className="mt-5 leading-7 text-emerald-100">{memoryTip}</p>

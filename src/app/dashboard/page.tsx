@@ -47,7 +47,7 @@ export default function DashboardPage() {
               <p className="text-sm font-semibold uppercase tracking-[0.16em] text-emerald-200">
                 Current lesson
               </p>
-              <h2 className="mt-3 text-3xl font-bold tracking-tight text-white">
+              <h2 className="mt-3 text-3xl font-bold tracking-tight text-slate-950">
                 {currentLesson.title}
               </h2>
               <p className="mt-3 max-w-2xl leading-7 text-emerald-100">

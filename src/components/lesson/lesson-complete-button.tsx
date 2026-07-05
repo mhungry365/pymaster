@@ -16,7 +16,7 @@ export function LessonCompleteButton({
 
   return (
     <div className="rounded-3xl border border-emerald-300/20 bg-emerald-300/10 p-6 text-center">
-      <h2 className="text-2xl font-semibold text-white">
+      <h2 className="text-2xl font-semibold text-slate-950">
         {isComplete ? "Lesson complete" : "Ready to finish?"}
       </h2>
       <p className="mx-auto mt-3 max-w-2xl leading-7 text-emerald-100">

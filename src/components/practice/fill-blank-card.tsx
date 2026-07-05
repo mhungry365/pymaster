@@ -20,13 +20,13 @@ export function FillBlankCard({
   const isCorrect = normalizedAnswer === question.answer || isCompleted;
 
   return (
-    <section className="rounded-3xl border border-white/10 bg-white/[0.04] p-6">
+    <section className="rounded-3xl border border-slate-200 bg-white p-6">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <p className="text-sm font-semibold uppercase tracking-[0.16em] text-emerald-300">
             Fill in the blank
           </p>
-          <h2 className="mt-3 text-2xl font-semibold text-white">
+          <h2 className="mt-3 text-2xl font-semibold text-slate-950">
             {question.title}
           </h2>
         </div>
@@ -35,9 +35,9 @@ export function FillBlankCard({
         </span>
       </div>
 
-      <p className="mt-4 leading-7 text-slate-300">{question.prompt}</p>
+      <p className="mt-4 leading-7 text-slate-600">{question.prompt}</p>
 
-      <div className="mt-6 rounded-2xl bg-slate-950 p-5 font-mono text-sm leading-7 text-slate-200">
+      <div className="mt-6 rounded-2xl bg-slate-100 p-5 font-mono text-sm leading-7 text-slate-200">
         <span>{question.codeBeforeBlank}</span>
         <input
           aria-label="Fill in the missing Python code"
@@ -50,7 +50,7 @@ export function FillBlankCard({
             )
           }
           placeholder="answer"
-          className="mx-1 w-44 rounded-lg border border-white/10 bg-slate-900 px-3 py-2 text-emerald-200 outline-none transition placeholder:text-slate-600 focus:border-emerald-300"
+          className="mx-1 w-44 rounded-lg border border-slate-200 bg-white px-3 py-2 text-emerald-200 outline-none transition placeholder:text-slate-600 focus:border-emerald-300"
         />
         <span className="whitespace-pre-wrap">{question.codeAfterBlank}</span>
       </div>
@@ -58,7 +58,7 @@ export function FillBlankCard({
       <div
         className={`mt-5 rounded-2xl border p-4 text-sm leading-6 ${
           !hasAnswered
-            ? "border-white/10 bg-slate-950/50 text-slate-300"
+            ? "border-slate-200 bg-slate-100/50 text-slate-600"
             : isCorrect
               ? "border-emerald-300/30 bg-emerald-300/10 text-emerald-100"
               : "border-amber-300/30 bg-amber-300/10 text-amber-100"

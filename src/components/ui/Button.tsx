@@ -12,8 +12,8 @@ type ButtonProps = {
 
 const variants = {
   primary: "bg-cyan-400 text-slate-950 hover:bg-cyan-300",
-  secondary: "border border-white/15 bg-white/5 text-white hover:bg-white/10",
-  ghost: "text-slate-300 hover:bg-white/10 hover:text-white",
+  secondary: "border border-slate-200 bg-white text-slate-950 hover:bg-slate-100",
+  ghost: "text-slate-600 hover:bg-slate-100 hover:text-slate-950",
   danger: "border border-red-400/30 bg-red-500/10 text-red-200 hover:bg-red-500/20",
 };
 

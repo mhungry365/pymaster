@@ -26,7 +26,7 @@ export function LessonPage({
   previousLesson,
 }: LessonPageProps) {
   return (
-    <main className="min-h-screen bg-slate-950 text-white">
+    <main className="min-h-screen bg-slate-100 text-slate-950">
       <AppHeader />
 
       <div className="mx-auto w-full max-w-7xl px-6 py-10 sm:px-8 lg:px-12">
@@ -55,11 +55,11 @@ export function LessonPage({
                   Lesson section
                 </p>
 
-                <h2 className="mt-3 text-2xl font-bold text-white">
+                <h2 className="mt-3 text-2xl font-bold text-slate-950">
                   {section.title}
                 </h2>
 
-                <div className="mt-5 grid gap-4 text-base leading-8 text-slate-300">
+                <div className="mt-5 grid gap-4 text-base leading-8 text-slate-600">
                   {section.content.map((paragraph) => (
                     <p key={paragraph}>{paragraph}</p>
                   ))}

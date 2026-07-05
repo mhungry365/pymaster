@@ -11,7 +11,7 @@ const variants = {
   purple: "border-purple-400/30 bg-purple-400/10 text-purple-300",
   green: "border-emerald-400/30 bg-emerald-400/10 text-emerald-300",
   amber: "border-amber-400/30 bg-amber-400/10 text-amber-300",
-  slate: "border-white/10 bg-white/5 text-slate-300",
+  slate: "border-slate-200 bg-white text-slate-600",
 };
 
 export function Badge({ children, variant = "slate", className = "" }: BadgeProps) {

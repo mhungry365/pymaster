@@ -20,7 +20,7 @@ export function ProjectsSummaryCard({
       </p>
       <div className="mt-3 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
         <div>
-          <h2 className="text-2xl font-semibold text-white">
+          <h2 className="text-2xl font-semibold text-slate-950">
             {progressPercent}% complete
           </h2>
           <p className="mt-2 max-w-2xl leading-7 text-emerald-100">
@@ -28,42 +28,42 @@ export function ProjectsSummaryCard({
             once per build.
           </p>
         </div>
-        <div className="rounded-2xl border border-emerald-300/30 bg-slate-950/50 px-5 py-3 text-center">
+        <div className="rounded-2xl border border-emerald-300/30 bg-slate-100/50 px-5 py-3 text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-emerald-200">
             Project XP
           </p>
-          <p className="mt-1 text-2xl font-bold text-white">
+          <p className="mt-1 text-2xl font-bold text-slate-950">
             {earnedXp}/{totalXp}
           </p>
         </div>
       </div>
 
       <div className="mt-6 grid gap-4 sm:grid-cols-3">
-        <div className="rounded-2xl border border-white/10 bg-slate-950/50 p-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">
+        <div className="rounded-2xl border border-slate-200 bg-slate-100/50 p-4">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
             Total projects
           </p>
-          <p className="mt-2 text-2xl font-bold text-white">{totalProjects}</p>
+          <p className="mt-2 text-2xl font-bold text-slate-950">{totalProjects}</p>
         </div>
-        <div className="rounded-2xl border border-white/10 bg-slate-950/50 p-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">
+        <div className="rounded-2xl border border-slate-200 bg-slate-100/50 p-4">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
             Completed
           </p>
-          <p className="mt-2 text-2xl font-bold text-white">
+          <p className="mt-2 text-2xl font-bold text-slate-950">
             {completedProjects}
           </p>
         </div>
-        <div className="rounded-2xl border border-white/10 bg-slate-950/50 p-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">
+        <div className="rounded-2xl border border-slate-200 bg-slate-100/50 p-4">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
             Remaining
           </p>
-          <p className="mt-2 text-2xl font-bold text-white">
+          <p className="mt-2 text-2xl font-bold text-slate-950">
             {totalProjects - completedProjects}
           </p>
         </div>
       </div>
 
-      <div className="mt-6 h-3 overflow-hidden rounded-full bg-slate-950">
+      <div className="mt-6 h-3 overflow-hidden rounded-full bg-slate-100">
         <div
           className="h-full rounded-full bg-emerald-400 transition-all"
           style={{ width: `${progressPercent}%` }}

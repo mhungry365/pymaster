@@ -21,21 +21,21 @@ export function PracticeProgress({
           <p className="text-sm font-semibold uppercase tracking-[0.16em] text-emerald-200">
             Practice progress
           </p>
-          <h2 className="mt-2 text-2xl font-semibold text-white">
+          <h2 className="mt-2 text-2xl font-semibold text-slate-950">
             {completedCount} of {totalCount} completed
           </h2>
         </div>
-        <div className="rounded-2xl border border-emerald-300/30 bg-slate-950/50 px-5 py-3 text-center">
+        <div className="rounded-2xl border border-emerald-300/30 bg-slate-100/50 px-5 py-3 text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-emerald-200">
             XP earned
           </p>
-          <p className="mt-1 text-2xl font-bold text-white">
+          <p className="mt-1 text-2xl font-bold text-slate-950">
             {earnedXp}/{totalXp}
           </p>
         </div>
       </div>
 
-      <div className="mt-6 h-3 overflow-hidden rounded-full bg-slate-950">
+      <div className="mt-6 h-3 overflow-hidden rounded-full bg-slate-100">
         <div
           className="h-full rounded-full bg-emerald-400 transition-all"
           style={{ width: `${progressPercent}%` }}

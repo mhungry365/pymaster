@@ -59,7 +59,7 @@ export function ProgressOverview({
             detail={`${completedTrackableItems} of ${totalTrackableItems} local progress items complete.`}
           />
         </div>
-        <div className="mt-6 h-3 overflow-hidden rounded-full bg-slate-950">
+        <div className="mt-6 h-3 overflow-hidden rounded-full bg-slate-100">
           <div
             className="h-full rounded-full bg-emerald-400 transition-all"
             style={{ width: `${overallPercent}%` }}
@@ -67,7 +67,7 @@ export function ProgressOverview({
         </div>
       </section>
 
-      <section className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 sm:p-8">
+      <section className="rounded-3xl border border-slate-200 bg-white p-6 sm:p-8">
         <p className="text-sm font-semibold uppercase tracking-[0.16em] text-emerald-300">
           Recent Progress
         </p>

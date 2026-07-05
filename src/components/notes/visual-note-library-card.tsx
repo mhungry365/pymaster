@@ -7,19 +7,19 @@ type VisualNoteLibraryCardProps = {
 
 export function VisualNoteLibraryCard({ note }: VisualNoteLibraryCardProps) {
   return (
-    <article className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 transition hover:-translate-y-1 hover:border-emerald-300/40 hover:bg-white/[0.06]">
+    <article className="rounded-3xl border border-slate-200 bg-white p-6 transition hover:-translate-y-1 hover:border-emerald-300/40 hover:bg-white/[0.06]">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-emerald-300">
             {note.category}
           </p>
-          <h2 className="mt-3 text-2xl font-semibold text-white">
+          <h2 className="mt-3 text-2xl font-semibold text-slate-950">
             {note.title}
           </h2>
         </div>
       </div>
 
-      <p className="mt-4 text-sm leading-6 text-slate-300">
+      <p className="mt-4 text-sm leading-6 text-slate-600">
         {note.explanation}
       </p>
 
@@ -48,11 +48,11 @@ export function VisualNoteLibraryCard({ note }: VisualNoteLibraryCardProps) {
             {note.commonMistake}
           </p>
         </div>
-        <div className="rounded-2xl border border-white/10 bg-slate-950/50 p-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">
+        <div className="rounded-2xl border border-slate-200 bg-slate-100/50 p-4">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
             Memory tip
           </p>
-          <p className="mt-2 text-sm leading-6 text-slate-300">
+          <p className="mt-2 text-sm leading-6 text-slate-600">
             {note.memoryTip}
           </p>
         </div>

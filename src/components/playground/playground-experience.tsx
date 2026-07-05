@@ -57,7 +57,7 @@ export function PlaygroundExperience() {
   return (
     <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
       <div className="grid gap-5">
-        <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5">
+        <div className="rounded-3xl border border-slate-200 bg-white p-5">
           <div className="grid gap-4 sm:grid-cols-[1fr_auto_auto] sm:items-end">
             <ExampleSelector
               examples={playgroundExamples}
@@ -74,7 +74,7 @@ export function PlaygroundExperience() {
             <button
               type="button"
               onClick={handleReset}
-              className="inline-flex h-12 items-center justify-center rounded-full border border-white/10 px-6 text-sm font-semibold text-white transition hover:border-emerald-300/50 hover:bg-white/5"
+              className="inline-flex h-12 items-center justify-center rounded-full border border-slate-200 px-6 text-sm font-semibold text-slate-950 transition hover:border-emerald-300/50 hover:bg-white"
             >
               Reset
             </button>
@@ -91,14 +91,14 @@ export function PlaygroundExperience() {
           hasRun={hasRun}
           isError={isError}
         />
-        <section className="rounded-3xl border border-white/10 bg-white/[0.04] p-6">
+        <section className="rounded-3xl border border-slate-200 bg-white p-6">
           <p className="text-sm font-semibold uppercase tracking-[0.16em] text-emerald-300">
             Beginner Hint
           </p>
-          <h2 className="mt-3 text-xl font-semibold text-white">
+          <h2 className="mt-3 text-xl font-semibold text-slate-950">
             {selectedExample.label}
           </h2>
-          <p className="mt-3 leading-7 text-slate-300">
+          <p className="mt-3 leading-7 text-slate-600">
             {selectedExample.hint}
           </p>
           <Link
@@ -107,7 +107,7 @@ export function PlaygroundExperience() {
           >
             Open related lesson
           </Link>
-          <div className="mt-5 rounded-2xl border border-white/10 bg-slate-950/60 p-4 text-sm leading-6 text-slate-400">
+          <div className="mt-5 rounded-2xl border border-slate-200 bg-slate-100/60 p-4 text-sm leading-6 text-slate-500">
             This is simulated output for now. Real Python execution coming
             later.
           </div>

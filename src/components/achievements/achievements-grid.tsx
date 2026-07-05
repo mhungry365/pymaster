@@ -12,16 +12,16 @@ export function AchievementsGrid() {
   ).length;
 
   return (
-    <section className="mt-6 rounded-3xl border border-white/10 bg-white/[0.04] p-6 sm:p-8">
+    <section className="mt-6 rounded-3xl border border-slate-200 bg-white p-6 sm:p-8">
       <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="text-sm font-semibold uppercase tracking-[0.16em] text-emerald-300">
             Achievements
           </p>
-          <h2 className="mt-3 text-2xl font-semibold text-white">
+          <h2 className="mt-3 text-2xl font-semibold text-slate-950">
             Badges and milestones
           </h2>
-          <p className="mt-3 max-w-2xl leading-7 text-slate-300">
+          <p className="mt-3 max-w-2xl leading-7 text-slate-600">
             Unlock badges as you complete lessons, practice questions, projects,
             streaks, and XP milestones.
           </p>
@@ -30,7 +30,7 @@ export function AchievementsGrid() {
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-emerald-200">
             Unlocked
           </p>
-          <p className="mt-1 text-2xl font-bold text-white">
+          <p className="mt-1 text-2xl font-bold text-slate-950">
             {unlockedCount}/{calculatedAchievements.length}
           </p>
         </div>

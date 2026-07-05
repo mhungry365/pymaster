@@ -14,11 +14,11 @@ export function QuizCard({ quiz }: QuizCardProps) {
   const hasAnswered = selectedOptionId !== null;
 
   return (
-    <section className="rounded-3xl border border-white/10 bg-white/[0.04] p-6">
+    <section className="rounded-3xl border border-slate-200 bg-white p-6">
       <p className="text-sm font-semibold uppercase tracking-[0.16em] text-emerald-300">
         Quick Check
       </p>
-      <h2 className="mt-3 text-2xl font-semibold text-white">
+      <h2 className="mt-3 text-2xl font-semibold text-slate-950">
         {quiz.question}
       </h2>
 
@@ -33,8 +33,8 @@ export function QuizCard({ quiz }: QuizCardProps) {
               onClick={() => setSelectedOptionId(option.id)}
               className={`rounded-2xl border px-4 py-3 text-left text-sm font-medium transition ${
                 isSelected
-                  ? "border-emerald-300 bg-emerald-300/10 text-white"
-                  : "border-white/10 bg-slate-950/50 text-slate-300 hover:border-emerald-300/40 hover:text-white"
+                  ? "border-emerald-300 bg-emerald-300/10 text-slate-950"
+                  : "border-slate-200 bg-slate-100/50 text-slate-600 hover:border-emerald-300/40 hover:text-slate-950"
               }`}
             >
               {option.label}

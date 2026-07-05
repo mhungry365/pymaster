@@ -19,7 +19,7 @@ export function CodeExamplesSection({ examples }: Props) {
 
       <div className="rounded-3xl border border-emerald-300/20 bg-emerald-300/10 p-5 sm:flex sm:items-center sm:justify-between sm:gap-6">
         <div>
-          <h2 className="text-xl font-bold text-white">Try this in Playground</h2>
+          <h2 className="text-xl font-bold text-slate-950">Try this in Playground</h2>
           <p className="mt-2 text-sm leading-6 text-emerald-100">
             Open the playground to edit similar examples and compare your
             prediction with simulated output.

@@ -49,7 +49,7 @@ export function ProjectLibraryGrid() {
         progressPercent={progressPercent}
       />
 
-      <section className="rounded-3xl border border-white/10 bg-white/[0.04] p-4">
+      <section className="rounded-3xl border border-slate-200 bg-white p-4">
         <div className="flex flex-wrap gap-2">
           {filters.map((filter) => {
             const isActive = activeFilter === filter;
@@ -62,7 +62,7 @@ export function ProjectLibraryGrid() {
                 className={`rounded-full border px-4 py-2 text-sm font-semibold transition ${
                   isActive
                     ? "border-emerald-300 bg-emerald-300/10 text-emerald-100"
-                    : "border-white/10 text-slate-300 hover:border-emerald-300/40 hover:bg-white/5 hover:text-white"
+                    : "border-slate-200 text-slate-600 hover:border-emerald-300/40 hover:bg-white hover:text-slate-950"
                 }`}
               >
                 {filter}

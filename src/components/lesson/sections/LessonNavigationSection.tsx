@@ -11,31 +11,31 @@ export function LessonNavigationSection({
   nextLesson,
 }: Props) {
   return (
-    <section className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 sm:p-8">
-      <p className="text-sm font-semibold uppercase tracking-[0.16em] text-slate-400">
+    <section className="rounded-3xl border border-slate-200 bg-white p-6 sm:p-8">
+      <p className="text-sm font-semibold uppercase tracking-[0.16em] text-slate-500">
         Lesson navigation
       </p>
 
       <div className="mt-4 grid gap-4 md:grid-cols-2">
-        <div className="rounded-2xl border border-white/10 bg-slate-950/50 p-5">
+        <div className="rounded-2xl border border-slate-200 bg-slate-100/50 p-5">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
             Previous
           </p>
 
           {previousLesson ? (
             <>
-              <h2 className="mt-3 text-xl font-semibold text-white">
+              <h2 className="mt-3 text-xl font-semibold text-slate-950">
                 {previousLesson.title}
               </h2>
               <Link
                 href={`/lessons/${previousLesson.slug}`}
-                className="mt-5 inline-flex h-11 items-center justify-center rounded-full border border-white/10 px-5 text-sm font-semibold text-white transition hover:border-emerald-300/50 hover:bg-white/5"
+                className="mt-5 inline-flex h-11 items-center justify-center rounded-full border border-slate-200 px-5 text-sm font-semibold text-slate-950 transition hover:border-emerald-300/50 hover:bg-white"
               >
                 Review Previous
               </Link>
             </>
           ) : (
-            <p className="mt-3 text-slate-400">
+            <p className="mt-3 text-slate-500">
               This is the first lesson in the path.
             </p>
           )}
@@ -46,7 +46,7 @@ export function LessonNavigationSection({
             Next
           </p>
 
-          <h2 className="mt-3 text-xl font-semibold text-white">
+          <h2 className="mt-3 text-xl font-semibold text-slate-950">
             {nextLesson ? nextLesson.title : "Next lesson coming soon"}
           </h2>
 

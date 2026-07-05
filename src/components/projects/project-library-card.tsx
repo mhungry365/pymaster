@@ -17,7 +17,7 @@ export function ProjectLibraryCard({
       className={`flex flex-col rounded-3xl border p-6 transition hover:-translate-y-1 ${
         isCompleted
           ? "border-emerald-300/40 bg-emerald-300/10"
-          : "border-white/10 bg-white/[0.04] hover:border-emerald-300/40 hover:bg-white/[0.06]"
+          : "border-slate-200 bg-white hover:border-emerald-300/40 hover:bg-white/[0.06]"
       }`}
     >
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
@@ -25,7 +25,7 @@ export function ProjectLibraryCard({
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-emerald-300">
             {project.category}
           </p>
-          <h2 className="mt-3 text-2xl font-semibold text-white">
+          <h2 className="mt-3 text-2xl font-semibold text-slate-950">
             {project.title}
           </h2>
         </div>
@@ -34,16 +34,16 @@ export function ProjectLibraryCard({
         </span>
       </div>
 
-      <div className="mt-5 flex flex-wrap gap-3 text-sm text-slate-300">
-        <span className="rounded-full border border-white/10 bg-slate-950/60 px-4 py-2">
+      <div className="mt-5 flex flex-wrap gap-3 text-sm text-slate-600">
+        <span className="rounded-full border border-slate-200 bg-slate-100/60 px-4 py-2">
           {project.difficulty}
         </span>
-        <span className="rounded-full border border-white/10 bg-slate-950/60 px-4 py-2">
+        <span className="rounded-full border border-slate-200 bg-slate-100/60 px-4 py-2">
           {project.estimatedTime}
         </span>
       </div>
 
-      <p className="mt-5 text-sm leading-6 text-slate-300">
+      <p className="mt-5 text-sm leading-6 text-slate-600">
         {project.description}
       </p>
 

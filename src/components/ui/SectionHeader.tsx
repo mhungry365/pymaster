@@ -23,8 +23,8 @@ export function SectionHeader({
             {eyebrow}
           </p>
         )}
-        <h2 className="text-3xl font-black text-white">{title}</h2>
-        {description && <p className="mt-2 max-w-2xl text-slate-300">{description}</p>}
+        <h2 className="text-3xl font-black text-slate-950">{title}</h2>
+        {description && <p className="mt-2 max-w-2xl text-slate-600">{description}</p>}
       </div>
       {action}
     </div>

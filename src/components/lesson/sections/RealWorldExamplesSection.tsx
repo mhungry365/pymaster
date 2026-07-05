@@ -11,7 +11,7 @@ export function RealWorldExamplesSection({ examples }: Props) {
         Real-world examples
       </p>
 
-      <h2 className="mt-3 text-2xl font-bold text-white">
+      <h2 className="mt-3 text-2xl font-bold text-slate-950">
         Where this shows up
       </h2>
 
@@ -19,7 +19,7 @@ export function RealWorldExamplesSection({ examples }: Props) {
         {examples.map((example) => (
           <div
             key={example}
-            className="rounded-2xl border border-white/10 bg-slate-950/50 p-4 text-sm leading-6 text-slate-300"
+            className="rounded-2xl border border-slate-200 bg-slate-100/50 p-4 text-sm leading-6 text-slate-600"
           >
             {example}
           </div>

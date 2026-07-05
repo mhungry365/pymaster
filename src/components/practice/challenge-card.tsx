@@ -24,11 +24,11 @@ export function ChallengeCard({
           <p className="text-sm font-semibold uppercase tracking-[0.16em] text-emerald-200">
             Mini challenge
           </p>
-          <h2 className="mt-3 text-2xl font-semibold text-white">
+          <h2 className="mt-3 text-2xl font-semibold text-slate-950">
             {challenge.title}
           </h2>
         </div>
-        <span className="rounded-full border border-emerald-300/30 bg-slate-950/50 px-4 py-2 text-sm font-semibold text-emerald-100">
+        <span className="rounded-full border border-emerald-300/30 bg-slate-100/50 px-4 py-2 text-sm font-semibold text-emerald-100">
           {isComplete ? "Completed" : `${challenge.xpReward} XP`}
         </span>
       </div>
@@ -48,7 +48,7 @@ export function ChallengeCard({
         value={response}
         onChange={(event) => onChangeResponse(event.target.value)}
         placeholder="Write your mini program here..."
-        className="mt-6 min-h-40 w-full resize-y rounded-2xl border border-emerald-300/20 bg-slate-950 p-4 font-mono text-sm leading-6 text-slate-200 outline-none transition placeholder:text-slate-600 focus:border-emerald-300"
+        className="mt-6 min-h-40 w-full resize-y rounded-2xl border border-emerald-300/20 bg-slate-100 p-4 font-mono text-sm leading-6 text-slate-200 outline-none transition placeholder:text-slate-600 focus:border-emerald-300"
       />
 
       <button

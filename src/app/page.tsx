@@ -13,7 +13,7 @@ const features = [
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-slate-950 text-white">
+    <main className="min-h-screen bg-slate-100 text-slate-950">
       <AppHeader />
 
       <section className="mx-auto max-w-6xl px-6 py-24 text-center">
@@ -25,7 +25,7 @@ export default function Home() {
           Become confident in Python with interactive lessons.
         </h1>
 
-        <p className="mx-auto mt-6 max-w-2xl text-lg text-slate-300">
+        <p className="mx-auto mt-6 max-w-2xl text-lg text-slate-600">
           PyMaster combines visual lessons, practice, projects, XP, streaks,
           achievements, and a playground to help beginners learn Python step by step.
         </p>
@@ -40,7 +40,7 @@ export default function Home() {
 
           <Link
             href="/curriculum"
-            className="rounded-2xl border border-white/20 px-8 py-4 font-bold hover:bg-white/10"
+            className="rounded-2xl border border-slate-300 px-8 py-4 font-bold hover:bg-slate-100"
           >
             View Curriculum
           </Link>
@@ -51,10 +51,10 @@ export default function Home() {
         {features.map((feature) => (
           <div
             key={feature}
-            className="rounded-3xl border border-white/10 bg-white/5 p-6"
+            className="rounded-3xl border border-slate-200 bg-white p-6"
           >
             <h3 className="text-xl font-bold">{feature}</h3>
-            <p className="mt-2 text-sm text-slate-400">
+            <p className="mt-2 text-sm text-slate-500">
               Built into the current PyMaster MVP and ready to expand.
             </p>
           </div>
@@ -62,9 +62,9 @@ export default function Home() {
       </section>
 
       <section className="mx-auto max-w-6xl px-6 pb-24">
-        <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-cyan-400/10 to-purple-500/10 p-8">
+        <div className="rounded-3xl border border-slate-200 bg-gradient-to-br from-cyan-400/10 to-purple-500/10 p-8">
           <h2 className="text-3xl font-bold">Practice like a real developer</h2>
-          <p className="mt-3 max-w-2xl text-slate-300">
+          <p className="mt-3 max-w-2xl text-slate-600">
             Learn a concept, try it in the playground, answer questions, complete
             projects, and track your progress as you improve.
           </p>
@@ -73,10 +73,10 @@ export default function Home() {
             <Link href="/playground" className="rounded-xl bg-white px-5 py-3 font-bold text-slate-950">
               Open Playground
             </Link>
-            <Link href="/practice" className="rounded-xl border border-white/20 px-5 py-3 font-bold">
+            <Link href="/practice" className="rounded-xl border border-slate-300 px-5 py-3 font-bold">
               Practice Questions
             </Link>
-            <Link href="/projects" className="rounded-xl border border-white/20 px-5 py-3 font-bold">
+            <Link href="/projects" className="rounded-xl border border-slate-300 px-5 py-3 font-bold">
               View Projects
             </Link>
           </div>

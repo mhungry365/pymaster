@@ -25,25 +25,25 @@ export default function CurriculumPage() {
           return (
             <article
               key={moduleTitle}
-              className="flex flex-col rounded-3xl border border-white/10 bg-white/[0.04] p-6 transition hover:-translate-y-1 hover:border-emerald-300/40 hover:bg-white/[0.06]"
+              className="flex flex-col rounded-3xl border border-slate-200 bg-white p-6 transition hover:-translate-y-1 hover:border-emerald-300/40 hover:bg-white/[0.06]"
             >
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-emerald-300">
                 Module
               </p>
-              <h2 className="mt-3 text-2xl font-semibold text-white">
+              <h2 className="mt-3 text-2xl font-semibold text-slate-950">
                 {moduleTitle}
               </h2>
-              <p className="mt-3 text-sm leading-6 text-slate-400">
+              <p className="mt-3 text-sm leading-6 text-slate-500">
                 Build confidence with {moduleLessons.length} connected beginner
                 lessons.
               </p>
 
               <div className="mt-6">
-                <div className="mb-2 flex items-center justify-between text-xs font-semibold uppercase tracking-[0.14em] text-slate-400">
+                <div className="mb-2 flex items-center justify-between text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">
                   <span>Progress</span>
                   <span>{progress}%</span>
                 </div>
-                <div className="h-2 overflow-hidden rounded-full bg-slate-900">
+                <div className="h-2 overflow-hidden rounded-full bg-white">
                   <div
                     className="h-full rounded-full bg-emerald-400"
                     style={{ width: `${progress}%` }}
@@ -56,22 +56,22 @@ export default function CurriculumPage() {
                   <Link
                     key={lesson.slug}
                     href={`/lessons/${lesson.slug}`}
-                    className="rounded-2xl border border-white/10 bg-slate-950/50 px-4 py-4 text-sm transition hover:border-emerald-300/40 hover:bg-emerald-300/10"
+                    className="rounded-2xl border border-slate-200 bg-slate-100/50 px-4 py-4 text-sm transition hover:border-emerald-300/40 hover:bg-emerald-300/10"
                   >
                     <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                       <div>
-                        <p className="font-semibold text-white">
+                        <p className="font-semibold text-slate-950">
                           {lesson.title}
                         </p>
-                        <p className="mt-1 text-slate-400">
+                        <p className="mt-1 text-slate-500">
                           {lesson.description}
                         </p>
                       </div>
-                      <div className="flex shrink-0 flex-wrap gap-2 text-xs text-slate-300">
-                        <span className="rounded-full border border-white/10 px-3 py-1">
+                      <div className="flex shrink-0 flex-wrap gap-2 text-xs text-slate-600">
+                        <span className="rounded-full border border-slate-200 px-3 py-1">
                           {lesson.difficulty}
                         </span>
-                        <span className="rounded-full border border-white/10 px-3 py-1">
+                        <span className="rounded-full border border-slate-200 px-3 py-1">
                           {lesson.estimatedTime}
                         </span>
                         <span className="rounded-full border border-emerald-300/30 bg-emerald-300/10 px-3 py-1 text-emerald-200">

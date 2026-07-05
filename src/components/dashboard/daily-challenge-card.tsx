@@ -17,7 +17,7 @@ export function DailyChallengeCard() {
           <p className="text-sm font-semibold uppercase tracking-[0.16em] text-emerald-200">
             Daily Challenge
           </p>
-          <h2 className="mt-3 text-2xl font-semibold text-white">
+          <h2 className="mt-3 text-2xl font-semibold text-slate-950">
             {challenge.title}
           </h2>
           <p className="mt-2 text-sm font-semibold text-emerald-100">
