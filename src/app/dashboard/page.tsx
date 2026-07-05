@@ -1,24 +1,28 @@
+import Link from "next/link";
 import { ContentCard } from "@/components/content-card";
 import { PageShell } from "@/components/page-shell";
 
-const nextSteps = [
-  {
-    title: "Continue Variables",
-    description:
-      "Pick up the first lesson and learn how Python stores names, values, and state.",
-    label: "Next lesson",
-  },
+const quickActions = [
   {
     title: "Open Playground",
     description:
-      "Try a few snippets, run experiments, and turn concepts into working code.",
+      "Experiment with examples and simulated output after you read the lesson.",
     label: "Practice",
+    href: "/playground",
   },
   {
-    title: "Start Notes",
+    title: "View Curriculum",
+    description:
+      "See where Python Variables fits in the larger beginner learning path.",
+    label: "Roadmap",
+    href: "/curriculum",
+  },
+  {
+    title: "Update Notes",
     description:
       "Capture definitions, examples, and questions you want to revisit later.",
     label: "Study habit",
+    href: "/notes",
   },
 ];
 
@@ -29,9 +33,49 @@ export default function DashboardPage() {
       title="Your Python learning home"
       description="Track your momentum, jump back into lessons, and keep the next useful action close."
     >
-      <div className="grid gap-4 md:grid-cols-3">
-        {nextSteps.map((step) => (
-          <ContentCard key={step.title} {...step} />
+      <section className="rounded-3xl border border-emerald-300/20 bg-emerald-300/10 p-6 sm:p-8">
+        <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-center">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-emerald-200">
+              Current lesson
+            </p>
+            <h2 className="mt-3 text-3xl font-bold tracking-tight text-white">
+              Python Variables
+            </h2>
+            <p className="mt-3 max-w-2xl leading-7 text-emerald-100">
+              Learn how Python stores values with readable names, then try the
+              same ideas in the playground.
+            </p>
+            <div className="mt-5 flex flex-wrap gap-3 text-sm text-emerald-100">
+              <span className="rounded-full border border-emerald-300/30 px-4 py-2">
+                Beginner
+              </span>
+              <span className="rounded-full border border-emerald-300/30 px-4 py-2">
+                10 min
+              </span>
+              <span className="rounded-full border border-emerald-300/30 px-4 py-2">
+                50 XP
+              </span>
+            </div>
+          </div>
+          <Link
+            href="/lessons/python-variables"
+            className="inline-flex h-12 items-center justify-center rounded-full bg-emerald-400 px-6 text-sm font-semibold text-slate-950 transition hover:bg-emerald-300"
+          >
+            Start / Continue
+          </Link>
+        </div>
+      </section>
+
+      <div className="mt-6 grid gap-4 md:grid-cols-3">
+        {quickActions.map((action) => (
+          <Link key={action.title} href={action.href}>
+            <ContentCard
+              title={action.title}
+              description={action.description}
+              label={action.label}
+            />
+          </Link>
         ))}
       </div>
     </PageShell>
