@@ -145,7 +145,7 @@ export function LessonPage({ lesson, nextLesson }: LessonPageProps) {
             </ul>
           </section>
 
-          <LessonCompleteButton xpReward={lesson.xp} />
+          <LessonCompleteButton lessonSlug={lesson.slug} xpReward={lesson.xp} />
 
           <section className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 sm:p-8">
             <p className="text-sm font-semibold uppercase tracking-[0.16em] text-slate-400">

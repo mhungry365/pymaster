@@ -1,9 +1,11 @@
 import Link from "next/link";
+import { ProgressDashboardCard } from "@/components/dashboard/progress-dashboard-card";
 import { ContentCard } from "@/components/content-card";
 import { PageShell } from "@/components/page-shell";
-import { getLessonBySlug } from "@/data/lessons";
+import { getAllLessons, getLessonBySlug } from "@/data/lessons";
 
 const currentLesson = getLessonBySlug("python-variables");
+const totalLessons = getAllLessons().length;
 
 const quickActions = [
   {
@@ -70,6 +72,8 @@ export default function DashboardPage() {
           </div>
         </section>
       ) : null}
+
+      <ProgressDashboardCard totalLessons={totalLessons} />
 
       <div className="mt-6 grid gap-4 md:grid-cols-3">
         {quickActions.map((action) => (
