@@ -9,6 +9,7 @@ import { PracticeSection } from "@/components/lesson/sections/PracticeSection";
 import { QuizSection } from "@/components/lesson/sections/QuizSection";
 import { RealWorldExamplesSection } from "@/components/lesson/sections/RealWorldExamplesSection";
 import { SummarySection } from "@/components/lesson/sections/SummarySection";
+import { VisualLearningSection } from "@/components/lesson/sections/VisualLearningSection";
 import { VisualNoteCard } from "@/components/lesson/visual-note-card";
 import { Card } from "@/components/ui/Card";
 import type { Lesson } from "@/types";
@@ -44,6 +45,8 @@ export function LessonPage({
           />
 
           <RealWorldExamplesSection examples={lesson.realWorldExamples} />
+
+          {lesson.slug === "python-variables" ? <VisualLearningSection /> : null}
 
           {lesson.sections.map((section) => (
             <div key={section.title} className="grid gap-6">
