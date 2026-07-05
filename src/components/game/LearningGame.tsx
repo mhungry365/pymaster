@@ -19,7 +19,14 @@ const QUESTIONS_PER_GAME = 10;
 const PASS_MARK = 7;
 
 function shuffle<T>(items: T[]) {
-  return [...items].sort(() => Math.random() - 0.5);
+  const copy = [...items];
+
+  for (let index = copy.length - 1; index > 0; index -= 1) {
+    const randomIndex = Math.floor(Math.random() * (index + 1));
+    [copy[index], copy[randomIndex]] = [copy[randomIndex], copy[index]];
+  }
+
+  return copy;
 }
 
 export function LearningGame({ game }: Props) {
@@ -48,7 +55,7 @@ export function LearningGame({ game }: Props) {
 
   const levels = useMemo(() => {
     return shuffle(difficultyLevels).slice(0, QUESTIONS_PER_GAME);
-  }, [activeDifficulty, difficultyLevels, sessionSeed]);
+  }, [activeDifficulty, game.slug, sessionSeed]);
 
   const level = levels[levelIndex] ?? levels[0];
   const answeredCount = selected ? levelIndex + 1 : levelIndex;

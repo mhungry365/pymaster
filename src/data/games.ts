@@ -35,34 +35,203 @@ const difficulties: GameDifficulty[] = [
   "Pro",
 ];
 
-function makeLevels(
-  prefix: string,
-  concept: string,
-  prompts: Array<{
-    title: string;
-    instruction: string;
-    prompt: string;
-    options: string[];
-    correctAnswer: string;
-    explanation: string;
-  }>,
-): GameLevel[] {
-  return Array.from({ length: 50 }, (_, index) => {
-    const base = prompts[index % prompts.length];
-    const difficulty = difficulties[Math.floor(index / 10)] ?? "Pro";
+function xpFor(difficulty: GameDifficulty) {
+  return {
+    Beginner: 10,
+    Easy: 15,
+    Intermediate: 20,
+    Advanced: 25,
+    Pro: 30,
+  }[difficulty];
+}
 
-    return {
-      id: `${prefix}-${index + 1}`,
-      title: `${base.title} ${index + 1}`,
+function makeLevel(
+  game: string,
+  difficulty: GameDifficulty,
+  index: number,
+  title: string,
+  instruction: string,
+  prompt: string,
+  options: string[],
+  correctAnswer: string,
+  explanation: string,
+): GameLevel {
+  return {
+    id: `${game}-${difficulty.toLowerCase()}-${index + 1}`,
+    title: `${title} ${index + 1}`,
+    difficulty,
+    instruction,
+    prompt,
+    options,
+    correctAnswer,
+    explanation,
+    xp: xpFor(difficulty),
+  };
+}
+
+function buildQuestions(
+  game: string,
+  builder: (difficulty: GameDifficulty, index: number) => GameLevel,
+) {
+  return difficulties.flatMap((difficulty) =>
+    Array.from({ length: 50 }, (_, index) => builder(difficulty, index)),
+  );
+}
+
+const names = ["score", "age", "coins", "health", "level", "speed", "points", "lives", "energy", "total"];
+const textNames = ["name", "city", "pet", "team", "food", "hero", "planet", "colour", "game", "friend"];
+const words = ["Mingz", "Python", "Dragon", "Dublin", "Tiger", "Robot", "Rocket", "Apple", "Ninja", "Ocean"];
+
+function variableQuestion(difficulty: GameDifficulty, index: number) {
+  const n = index + 1;
+  const variable = names[index % names.length];
+  const value = (index + 2) * 5;
+  const textVariable = textNames[index % textNames.length];
+  const word = words[index % words.length];
+  const type = index % 5;
+
+  if (type === 0) {
+    return makeLevel(
+      "variables",
       difficulty,
-      instruction: base.instruction,
-      prompt: base.prompt,
-      options: base.options,
-      correctAnswer: base.correctAnswer,
-      explanation: base.explanation,
-      xp: 10 + Math.floor(index / 10) * 5,
-    };
-  });
+      index,
+      "Store a Number",
+      "Choose the correct Python variable assignment.",
+      `Store ${value} in a variable called ${variable}.`,
+      [`${variable} = ${value}`, `${variable} == ${value}`, `${value} = ${variable}`, `print = ${value}`],
+      `${variable} = ${value}`,
+      "Use one equals sign to store a value in a variable.",
+    );
+  }
+
+  if (type === 1) {
+    return makeLevel(
+      "variables",
+      difficulty,
+      index,
+      "Store Text",
+      "Choose the correct way to store text.",
+      `Store "${word}" in a variable called ${textVariable}.`,
+      [`${textVariable} = "${word}"`, `${textVariable} = ${word}`, `"${word}" = ${textVariable}`, `${textVariable} == "${word}"`],
+      `${textVariable} = "${word}"`,
+      "Text must be wrapped in quotes.",
+    );
+  }
+
+  if (type === 2) {
+    return makeLevel(
+      "variables",
+      difficulty,
+      index,
+      "Predict Output",
+      "Choose what Python will print.",
+      `${variable} = ${value}\nprint(${variable})`,
+      [`${value}`, `${variable}`, `"${value}"`, "Error"],
+      `${value}`,
+      "Python prints the value stored inside the variable.",
+    );
+  }
+
+  if (type === 3) {
+    return makeLevel(
+      "variables",
+      difficulty,
+      index,
+      "Update Value",
+      "Choose the final printed value.",
+      `${variable} = ${value}\n${variable} = ${value + n}\nprint(${variable})`,
+      [`${value + n}`, `${value}`, `${variable}`, "Error"],
+      `${value + n}`,
+      "The latest value replaces the old value.",
+    );
+  }
+
+  return makeLevel(
+    "variables",
+    difficulty,
+    index,
+    "Best Variable Name",
+    "Choose the best variable name.",
+    `You need a variable for a player's ${variable}.`,
+    [`player_${variable}`, `player-${variable}`, `${value}`, "print"],
+    `player_${variable}`,
+    "Python variable names should be readable and can use underscores.",
+  );
+}
+
+function stringQuestion(difficulty: GameDifficulty, index: number) {
+  const word = words[index % words.length];
+  const word2 = words[(index + 3) % words.length];
+  const variable = textNames[index % textNames.length];
+  const type = index % 5;
+
+  if (type === 0) {
+    return makeLevel("strings", difficulty, index, "Quote Text", "Choose the correct string.", `Store ${word} as text.`, [`${variable} = "${word}"`, `${variable} = ${word}`, `"${variable}" = ${word}`, `${word} = "${variable}"`], `${variable} = "${word}"`, "Strings need quotes.");
+  }
+
+  if (type === 1) {
+    return makeLevel("strings", difficulty, index, "Join Strings", "Predict the output.", `print("${word}" + "${word2}")`, [`${word}${word2}`, `${word} ${word2}`, `"${word}${word2}"`, "Error"], `${word}${word2}`, "The + operator joins strings exactly as written.");
+  }
+
+  if (type === 2) {
+    return makeLevel("strings", difficulty, index, "Add Space", "Predict the output.", `print("${word}" + " " + "${word2}")`, [`${word} ${word2}`, `${word}${word2}`, `${word}+${word2}`, "Error"], `${word} ${word2}`, "The middle string adds a space.");
+  }
+
+  if (type === 3) {
+    return makeLevel("strings", difficulty, index, "Text or Number", "Choose the type.", `${variable} = "${index + 10}"`, ["string", "number", "boolean", "list"], "string", "Quotes make it text.");
+  }
+
+  return makeLevel("strings", difficulty, index, "Print Text", "Choose the correct print statement.", `Print ${word}.`, [`print("${word}")`, `print(${word})`, `"print(${word})"`, `${word}(print)`], `print("${word}")`, "Text inside print needs quotes.");
+}
+
+function numberQuestion(difficulty: GameDifficulty, index: number) {
+  const a = index + 2;
+  const b = (index % 9) + 1;
+  const type = index % 5;
+
+  if (type === 0) return makeLevel("numbers", difficulty, index, "Addition", "Choose the output.", `print(${a} + ${b})`, [`${a + b}`, `${a}${b}`, `${a - b}`, "Error"], `${a + b}`, "Python calculates the addition.");
+  if (type === 1) return makeLevel("numbers", difficulty, index, "Subtraction", "Choose the output.", `print(${a + 10} - ${b})`, [`${a + 10 - b}`, `${a + 10 + b}`, `${b}`, "Error"], `${a + 10 - b}`, "Python calculates the subtraction.");
+  if (type === 2) return makeLevel("numbers", difficulty, index, "Multiplication", "Choose the output.", `print(${a} * ${b})`, [`${a * b}`, `${a + b}`, `${a}${b}`, "Error"], `${a * b}`, "* means multiply.");
+  if (type === 3) return makeLevel("numbers", difficulty, index, "Variable Maths", "Choose the output.", `coins = ${a}\ncoins = coins + ${b}\nprint(coins)`, [`${a + b}`, `${a}`, `${b}`, "coins"], `${a + b}`, "The variable is updated with the new total.");
+  return makeLevel("numbers", difficulty, index, "Order of Operations", "Choose the output.", `print(${a} + ${b} * 2)`, [`${a + b * 2}`, `${(a + b) * 2}`, `${a + b}`, "Error"], `${a + b * 2}`, "Multiplication happens before addition.");
+}
+
+function conditionQuestion(difficulty: GameDifficulty, index: number) {
+  const value = index + 5;
+  const limit = (index % 10) + 8;
+  const type = index % 5;
+
+  if (type === 0) return makeLevel("conditions", difficulty, index, "Greater Than", "Choose what prints.", `score = ${value}\nif score > ${limit}:\n    print("Win")`, [value > limit ? "Win" : "Nothing prints", value > limit ? "Nothing prints" : "Win", "score", "Error"], value > limit ? "Win" : "Nothing prints", "The if block only runs when the condition is true.");
+  if (type === 1) return makeLevel("conditions", difficulty, index, "Age Check", "Choose what prints.", `age = ${value}\nif age >= 18:\n    print("Adult")\nelse:\n    print("Young")`, [value >= 18 ? "Adult" : "Young", value >= 18 ? "Young" : "Adult", "age", "Error"], value >= 18 ? "Adult" : "Young", "Python chooses if or else based on the condition.");
+  if (type === 2) return makeLevel("conditions", difficulty, index, "Boolean Door", "Choose what prints.", `has_key = ${index % 2 === 0 ? "True" : "False"}\nif has_key:\n    print("Open")`, [index % 2 === 0 ? "Open" : "Nothing prints", index % 2 === 0 ? "Nothing prints" : "Open", "True", "Error"], index % 2 === 0 ? "Open" : "Nothing prints", "True runs the block. False skips it.");
+  if (type === 3) return makeLevel("conditions", difficulty, index, "Compare Equal", "Choose the comparison operator.", `Check if score equals ${value}.`, [`score == ${value}`, `score = ${value}`, `score === ${value}`, `score => ${value}`], `score == ${value}`, "== compares values.");
+  return makeLevel("conditions", difficulty, index, "Not Equal", "Choose what prints.", `pin = ${value}\nif pin != ${limit}:\n    print("Different")`, [value !== limit ? "Different" : "Nothing prints", value !== limit ? "Nothing prints" : "Different", "pin", "Error"], value !== limit ? "Different" : "Nothing prints", "!= means not equal.");
+}
+
+function loopQuestion(difficulty: GameDifficulty, index: number) {
+  const count = (index % 5) + 2;
+  const item1 = words[index % words.length].toLowerCase();
+  const item2 = words[(index + 1) % words.length].toLowerCase();
+  const type = index % 5;
+
+  if (type === 0) return makeLevel("loops", difficulty, index, "Repeat Count", "How many times does it print?", `for i in range(${count}):\n    print("Go")`, [`${count} times`, `${count - 1} times`, "Forever", "Error"], `${count} times`, `range(${count}) repeats ${count} times.`);
+  if (type === 1) return makeLevel("loops", difficulty, index, "First Number", "What prints first?", `for number in range(${count}):\n    print(number)`, ["0", "1", `${count}`, "Error"], "0", "range starts at 0.");
+  if (type === 2) return makeLevel("loops", difficulty, index, "List Loop", "What appears?", `items = ["${item1}", "${item2}"]\nfor item in items:\n    print(item)`, [`${item1} and ${item2}`, "item", "items", "Error"], `${item1} and ${item2}`, "The loop visits every list item.");
+  if (type === 3) return makeLevel("loops", difficulty, index, "Loop Variable", "What changes each loop?", `for animal in ["cat", "dog", "fox"]:\n    print(animal)`, ["animal", "cat then dog then fox", "fox only", "Error"], "cat then dog then fox", "The loop variable changes to each value.");
+  return makeLevel("loops", difficulty, index, "Total Repeats", "How many lines are printed?", `for x in range(${count + 1}):\n    print("Hi")`, [`${count + 1}`, `${count}`, "1", "Forever"], `${count + 1}`, "The loop repeats once for each value in range.");
+}
+
+function debuggingQuestion(difficulty: GameDifficulty, index: number) {
+  const word = words[index % words.length];
+  const variable = names[index % names.length];
+  const value = index + 10;
+  const type = index % 5;
+
+  if (type === 0) return makeLevel("debugging", difficulty, index, "Fix Assignment", "Choose the correct line.", `Broken idea: ${variable} should store ${value}.`, [`${variable} = ${value}`, `${variable} == ${value}`, `${value} = ${variable}`, `print = ${value}`], `${variable} = ${value}`, "Use = to assign.");
+  if (type === 1) return makeLevel("debugging", difficulty, index, "Fix Quotes", "Fix the broken print.", `print(${word})`, [`print("${word}")`, `print = "${word}"`, `"print(${word})"`, `${word}(print)`], `print("${word}")`, "Text needs quotes.");
+  if (type === 2) return makeLevel("debugging", difficulty, index, "Fix Colon", "Choose the correct if line.", `if ${variable} > ${value}`, [`if ${variable} > ${value}:`, `if ${variable} > ${value};`, `if: ${variable} > ${value}`, `if ${variable} > ${value}.`], `if ${variable} > ${value}:`, "Python if statements need a colon.");
+  if (type === 3) return makeLevel("debugging", difficulty, index, "Fix List", "Choose the correct list.", `Store "${word}" and "${words[(index + 1) % words.length]}" in things.`, [`things = ["${word}", "${words[(index + 1) % words.length]}"]`, `things = "${word}", "${words[(index + 1) % words.length]}"`, `things == [${word}]`, `things = ${word} ${words[(index + 1) % words.length]}`], `things = ["${word}", "${words[(index + 1) % words.length]}"]`, "Lists use square brackets.");
+  return makeLevel("debugging", difficulty, index, "Fix Indentation", "What is missing?", `if True:\nprint("${word}")`, ["Indentation", "More quotes", "A list", "Nothing"], "Indentation", "Python blocks need indentation.");
 }
 
 export const games: GameDefinition[] = [
@@ -73,48 +242,7 @@ export const games: GameDefinition[] = [
     description: "Learn how Python remembers information using variables.",
     concept: "Variables",
     difficulty: "Beginner",
-    levels: makeLevels("variables", "Variables", [
-      {
-        title: "Name the Box",
-        instruction: "Choose the best variable name.",
-        prompt: "A game needs to remember 100 points.",
-        options: ["player_score", "100", "print", "score-player"],
-        correctAnswer: "player_score",
-        explanation: "player_score is readable and uses snake_case.",
-      },
-      {
-        title: "Store Text",
-        instruction: "Pick the correct Python code.",
-        prompt: "Store the name Mingz in a variable called name.",
-        options: ['name = "Mingz"', "name == Mingz", '"Mingz" = name', "print = name"],
-        correctAnswer: 'name = "Mingz"',
-        explanation: "Use one equals sign to store a value. Text needs quotes.",
-      },
-      {
-        title: "Predict Output",
-        instruction: "Choose what Python will print.",
-        prompt: 'name = "Mingz"\nprint(name)',
-        options: ["name", "Mingz", '"name"', "Error"],
-        correctAnswer: "Mingz",
-        explanation: "Python prints the value stored inside the variable.",
-      },
-      {
-        title: "Update Score",
-        instruction: "Choose the final value.",
-        prompt: "score = 10\nscore = 20\nprint(score)",
-        options: ["10", "20", "score", "Error"],
-        correctAnswer: "20",
-        explanation: "The latest value replaces the old value.",
-      },
-      {
-        title: "Fix Assignment",
-        instruction: "Which code stores age correctly?",
-        prompt: "Store 36 in a variable called age.",
-        options: ["age = 36", "age == 36", "36 = age", "print(age = 36)"],
-        correctAnswer: "age = 36",
-        explanation: "One equals sign assigns the value.",
-      },
-    ]),
+    levels: buildQuestions("variables", variableQuestion),
   },
   {
     slug: "strings",
@@ -123,48 +251,7 @@ export const games: GameDefinition[] = [
     description: "Learn text, quotes, joining, and string behaviour.",
     concept: "Strings",
     difficulty: "Beginner",
-    levels: makeLevels("strings", "Strings", [
-      {
-        title: "Magic Quotes",
-        instruction: "Choose the correct string.",
-        prompt: "Store Dragon as text.",
-        options: ['pet = "Dragon"', "pet = Dragon", '"pet" = Dragon', "Dragon = pet"],
-        correctAnswer: 'pet = "Dragon"',
-        explanation: "Text must be inside quotes.",
-      },
-      {
-        title: "Join Words",
-        instruction: "Predict the output.",
-        prompt: 'first = "Py"\nsecond = "2Learn"\nprint(first + second)',
-        options: ["Py2Learn", "firstsecond", "Py 2Learn", "Error"],
-        correctAnswer: "Py2Learn",
-        explanation: "The plus sign joins strings together.",
-      },
-      {
-        title: "String Space",
-        instruction: "Predict the output.",
-        prompt: 'print("Hello" + " " + "Python")',
-        options: ["Hello Python", "HelloPython", "Hello + Python", "Error"],
-        correctAnswer: "Hello Python",
-        explanation: "The middle string adds a space.",
-      },
-      {
-        title: "Text Number",
-        instruction: "What is this?",
-        prompt: 'age = "36"',
-        options: ["string", "number", "boolean", "list"],
-        correctAnswer: "string",
-        explanation: "Quotes make it text, even if it looks like a number.",
-      },
-      {
-        title: "Fix Greeting",
-        instruction: "Choose the correct print.",
-        prompt: "Print the word Hello.",
-        options: ['print("Hello")', "print(Hello)", '"print Hello"', "Hello()"],
-        correctAnswer: 'print("Hello")',
-        explanation: "Text needs quotes inside print().",
-      },
-    ]),
+    levels: buildQuestions("strings", stringQuestion),
   },
   {
     slug: "numbers",
@@ -173,48 +260,7 @@ export const games: GameDefinition[] = [
     description: "Train with Python numbers, maths, and calculations.",
     concept: "Numbers",
     difficulty: "Easy",
-    levels: makeLevels("numbers", "Numbers", [
-      {
-        title: "Add Attack",
-        instruction: "Choose the output.",
-        prompt: "print(5 + 3)",
-        options: ["8", "53", "5 + 3", "Error"],
-        correctAnswer: "8",
-        explanation: "Python calculates 5 + 3.",
-      },
-      {
-        title: "Multiply Strike",
-        instruction: "Choose the output.",
-        prompt: "coins = 4 * 5\nprint(coins)",
-        options: ["20", "45", "coins", "Error"],
-        correctAnswer: "20",
-        explanation: "The star symbol means multiply.",
-      },
-      {
-        title: "Subtraction Slash",
-        instruction: "Choose the output.",
-        prompt: "print(10 - 4)",
-        options: ["6", "14", "104", "Error"],
-        correctAnswer: "6",
-        explanation: "10 minus 4 is 6.",
-      },
-      {
-        title: "Division Gate",
-        instruction: "Choose the output.",
-        prompt: "print(12 / 3)",
-        options: ["4.0", "4", "123", "Error"],
-        correctAnswer: "4.0",
-        explanation: "Python division returns a decimal-style result.",
-      },
-      {
-        title: "Math Memory",
-        instruction: "Choose the value of total.",
-        prompt: "total = 2 + 3 * 4\nprint(total)",
-        options: ["14", "20", "24", "Error"],
-        correctAnswer: "14",
-        explanation: "Multiplication happens before addition.",
-      },
-    ]),
+    levels: buildQuestions("numbers", numberQuestion),
   },
   {
     slug: "conditions",
@@ -223,48 +269,7 @@ export const games: GameDefinition[] = [
     description: "Open doors by choosing correct if statement results.",
     concept: "Conditions",
     difficulty: "Intermediate",
-    levels: makeLevels("conditions", "Conditions", [
-      {
-        title: "Open Door",
-        instruction: "What will happen?",
-        prompt: 'level = 5\nif level > 3:\n    print("Door opens")',
-        options: ["Door opens", "Nothing", "level", "Error"],
-        correctAnswer: "Door opens",
-        explanation: "5 is greater than 3.",
-      },
-      {
-        title: "Locked Door",
-        instruction: "What will happen?",
-        prompt: 'age = 10\nif age >= 18:\n    print("Enter")',
-        options: ["Enter", "Nothing prints", "age", "Error"],
-        correctAnswer: "Nothing prints",
-        explanation: "10 is not greater than or equal to 18.",
-      },
-      {
-        title: "Rain Choice",
-        instruction: "Choose the output.",
-        prompt: 'raining = True\nif raining:\n    print("Take umbrella")',
-        options: ["Take umbrella", "Nothing", "False", "Error"],
-        correctAnswer: "Take umbrella",
-        explanation: "The condition is True.",
-      },
-      {
-        title: "Else Path",
-        instruction: "Choose the output.",
-        prompt: 'score = 40\nif score >= 50:\n    print("Pass")\nelse:\n    print("Try again")',
-        options: ["Try again", "Pass", "score", "Error"],
-        correctAnswer: "Try again",
-        explanation: "40 is less than 50, so else runs.",
-      },
-      {
-        title: "Compare Values",
-        instruction: "Which means equal comparison?",
-        prompt: "Check if score equals 10.",
-        options: ["score == 10", "score = 10", "score === 10", "score => 10"],
-        correctAnswer: "score == 10",
-        explanation: "Two equals signs compare values.",
-      },
-    ]),
+    levels: buildQuestions("conditions", conditionQuestion),
   },
   {
     slug: "loops",
@@ -273,48 +278,7 @@ export const games: GameDefinition[] = [
     description: "Run repeated actions and understand loops visually.",
     concept: "Loops",
     difficulty: "Advanced",
-    levels: makeLevels("loops", "Loops", [
-      {
-        title: "Three Laps",
-        instruction: "How many times does this print?",
-        prompt: 'for lap in range(3):\n    print("Run")',
-        options: ["3 times", "2 times", "1 time", "Forever"],
-        correctAnswer: "3 times",
-        explanation: "range(3) gives 0, 1, 2.",
-      },
-      {
-        title: "Fruit Parade",
-        instruction: "What appears?",
-        prompt: 'fruits = ["apple", "banana"]\nfor fruit in fruits:\n    print(fruit)',
-        options: ["apple and banana", "fruit", "fruits", "Error"],
-        correctAnswer: "apple and banana",
-        explanation: "The loop visits each item.",
-      },
-      {
-        title: "Count Start",
-        instruction: "What is printed first?",
-        prompt: 'for number in range(5):\n    print(number)',
-        options: ["0", "1", "5", "Error"],
-        correctAnswer: "0",
-        explanation: "range starts at 0 by default.",
-      },
-      {
-        title: "Loop Variable",
-        instruction: "What changes each time?",
-        prompt: 'for animal in ["cat", "dog"]:\n    print(animal)',
-        options: ["animal", "cat then dog", "dog only", "Error"],
-        correctAnswer: "cat then dog",
-        explanation: "animal takes each list value one by one.",
-      },
-      {
-        title: "Repeat Word",
-        instruction: "How many times?",
-        prompt: 'for i in range(2):\n    print("Hi")',
-        options: ["2", "1", "3", "Forever"],
-        correctAnswer: "2",
-        explanation: "range(2) repeats twice.",
-      },
-    ]),
+    levels: buildQuestions("loops", loopQuestion),
   },
   {
     slug: "debugging",
@@ -323,48 +287,7 @@ export const games: GameDefinition[] = [
     description: "Fix broken Python so the robot can move again.",
     concept: "Debugging",
     difficulty: "Pro",
-    levels: makeLevels("debugging", "Debugging", [
-      {
-        title: "Broken Battery",
-        instruction: "Which line correctly stores energy?",
-        prompt: "The robot needs energy = 100.",
-        options: ["energy = 100", "energy == 100", "100 = energy", "print = 100"],
-        correctAnswer: "energy = 100",
-        explanation: "One equals sign stores a value.",
-      },
-      {
-        title: "Voice Module",
-        instruction: "Fix the broken print statement.",
-        prompt: "print(Hello)",
-        options: ['print("Hello")', "print = Hello", '"print"(Hello)', "Hello(print)"],
-        correctAnswer: 'print("Hello")',
-        explanation: "Hello is text, so it needs quotes.",
-      },
-      {
-        title: "Missing Colon",
-        instruction: "Which line is correct?",
-        prompt: "if age > 18",
-        options: ["if age > 18:", "if age > 18;", "if age > 18.", "if: age > 18"],
-        correctAnswer: "if age > 18:",
-        explanation: "Python if statements need a colon.",
-      },
-      {
-        title: "List Brackets",
-        instruction: "Choose the correct list.",
-        prompt: "Store apple and banana in fruits.",
-        options: ['fruits = ["apple", "banana"]', 'fruits = "apple", "banana"', "fruits == [apple]", "list = apple banana"],
-        correctAnswer: 'fruits = ["apple", "banana"]',
-        explanation: "Lists use square brackets.",
-      },
-      {
-        title: "Indentation Fix",
-        instruction: "What does Python need inside if blocks?",
-        prompt: 'if True:\nprint("Go")',
-        options: ["Indentation", "More quotes", "A list", "Nothing"],
-        correctAnswer: "Indentation",
-        explanation: "Python uses indentation to know what belongs inside a block.",
-      },
-    ]),
+    levels: buildQuestions("debugging", debuggingQuestion),
   },
 ];
 
