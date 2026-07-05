@@ -1,6 +1,11 @@
 import { notFound } from "next/navigation";
 import { LessonPage } from "@/components/lesson/lesson-page";
-import { getAllLessons, getLessonBySlug, getNextLesson } from "@/data/lessons";
+import {
+  getAllLessons,
+  getLessonBySlug,
+  getNextLesson,
+  getPreviousLesson,
+} from "@/data/lessons";
 
 type LessonRouteProps = {
   params: Promise<{
@@ -22,5 +27,11 @@ export default async function DynamicLessonPage({ params }: LessonRouteProps) {
     notFound();
   }
 
-  return <LessonPage lesson={lesson} nextLesson={getNextLesson(slug)} />;
+  return (
+    <LessonPage
+      lesson={lesson}
+      nextLesson={getNextLesson(slug)}
+      previousLesson={getPreviousLesson(slug)}
+    />
+  );
 }

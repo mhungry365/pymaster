@@ -51,7 +51,10 @@ export type Lesson = {
   xp: number;
   description: string;
   learningObjectives: string[];
+  realWorldExamples: string[];
   sections: LessonSection[];
+  commonMistakes: string[];
+  memoryTip: string;
   codeExamples: LessonCodeExample[];
   quizzes: QuizQuestion[];
   fillBlankChallenges: FillBlankChallenge[];
