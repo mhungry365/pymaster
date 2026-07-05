@@ -32,9 +32,16 @@ export function LearningGame({ game }: Props) {
     ? selectedDifficulty
     : availableDifficulties[0];
 
-  const levels = game.levels.filter(
+  const difficultyLevels = game.levels.filter(
     (level) => level.difficulty === activeDifficulty,
   );
+
+  const [sessionSeed, setSessionSeed] = useState(0);
+
+  const levels = useMemo(() => {
+    const shuffled = [...difficultyLevels].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, 10);
+  }, [activeDifficulty, game.slug, sessionSeed]);
 
   const level = levels[levelIndex] ?? levels[0];
 
@@ -57,6 +64,7 @@ export function LearningGame({ game }: Props) {
     setLevelIndex(0);
     setSelected(null);
     setScore(0);
+    setSessionSeed((value) => value + 1);
   }
 
   function choose(option: string) {
@@ -77,6 +85,7 @@ export function LearningGame({ game }: Props) {
     setSelected(null);
     setLevelIndex(0);
     setScore(0);
+    setSessionSeed((value) => value + 1);
   }
 
   return (
