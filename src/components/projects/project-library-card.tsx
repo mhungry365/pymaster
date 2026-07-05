@@ -3,11 +3,23 @@ import type { PythonProject } from "@/types";
 
 type ProjectLibraryCardProps = {
   project: PythonProject;
+  isCompleted: boolean;
+  onComplete: (projectId: string, xp: number) => void;
 };
 
-export function ProjectLibraryCard({ project }: ProjectLibraryCardProps) {
+export function ProjectLibraryCard({
+  project,
+  isCompleted,
+  onComplete,
+}: ProjectLibraryCardProps) {
   return (
-    <article className="flex flex-col rounded-3xl border border-white/10 bg-white/[0.04] p-6 transition hover:-translate-y-1 hover:border-emerald-300/40 hover:bg-white/[0.06]">
+    <article
+      className={`flex flex-col rounded-3xl border p-6 transition hover:-translate-y-1 ${
+        isCompleted
+          ? "border-emerald-300/40 bg-emerald-300/10"
+          : "border-white/10 bg-white/[0.04] hover:border-emerald-300/40 hover:bg-white/[0.06]"
+      }`}
+    >
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-emerald-300">
@@ -18,7 +30,7 @@ export function ProjectLibraryCard({ project }: ProjectLibraryCardProps) {
           </h2>
         </div>
         <span className="rounded-full border border-emerald-300/30 bg-emerald-300/10 px-4 py-2 text-sm font-semibold text-emerald-200">
-          {project.xpReward} XP
+          {isCompleted ? "Completed" : `${project.xpReward} XP`}
         </span>
       </div>
 
@@ -64,9 +76,11 @@ export function ProjectLibraryCard({ project }: ProjectLibraryCardProps) {
 
       <button
         type="button"
-        className="mt-6 inline-flex h-12 items-center justify-center rounded-full bg-emerald-400 px-6 text-sm font-semibold text-slate-950 transition hover:bg-emerald-300"
+        onClick={() => onComplete(project.id, project.xpReward)}
+        disabled={isCompleted}
+        className="mt-6 inline-flex h-12 items-center justify-center rounded-full bg-emerald-400 px-6 text-sm font-semibold text-slate-950 transition hover:bg-emerald-300 disabled:cursor-not-allowed disabled:opacity-70"
       >
-        Start Project
+        {isCompleted ? "Project Completed" : "Start Project"}
       </button>
     </article>
   );
