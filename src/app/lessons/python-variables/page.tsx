@@ -1,47 +1,75 @@
-import { ContentCard } from "@/components/content-card";
-import { PageShell } from "@/components/page-shell";
-
-const lessonSteps = [
-  {
-    title: "Name a value",
-    description:
-      "Use assignment to store values in readable names like score, username, and is_complete.",
-    label: "Concept",
-  },
-  {
-    title: "Update state",
-    description:
-      "Practice changing a variable as your program runs and describing what changed.",
-    label: "Exercise",
-  },
-  {
-    title: "Read the output",
-    description:
-      "Use print statements to check your assumptions and explain results in plain language.",
-    label: "Reflection",
-  },
-];
+import { CodeBlock } from "@/components/lesson/code-block";
+import { LessonCompleteButton } from "@/components/lesson/lesson-complete-button";
+import { LessonHero } from "@/components/lesson/lesson-hero";
+import { PracticeTask } from "@/components/lesson/practice-task";
+import { QuizCard } from "@/components/lesson/quiz-card";
+import { VisualNoteCard } from "@/components/lesson/visual-note-card";
+import { AppHeader } from "@/components/app-header";
+import { pythonVariablesLesson } from "@/data/lessons";
 
 export default function PythonVariablesLessonPage() {
-  return (
-    <PageShell
-      eyebrow="Lesson"
-      title="Python Variables"
-      description="Learn how variables let Python programs remember information and reuse it later."
-    >
-      <div className="grid gap-4 md:grid-cols-3">
-        {lessonSteps.map((step) => (
-          <ContentCard key={step.title} {...step} />
-        ))}
-      </div>
-      <div className="mt-8 rounded-2xl border border-white/10 bg-slate-900/90 p-5">
-        <pre className="overflow-x-auto rounded-xl bg-slate-950 p-5 text-sm leading-7 text-slate-200">
-          <code>{`language = "Python"
-hours_practiced = 2
+  const lesson = pythonVariablesLesson;
 
-print(f"I practiced {language} for {hours_practiced} hours.")`}</code>
-        </pre>
+  return (
+    <main className="min-h-screen bg-slate-950 text-white">
+      <AppHeader />
+      <div className="mx-auto w-full max-w-7xl px-6 py-10 sm:px-8 lg:px-12">
+        <LessonHero
+          title={lesson.title}
+          difficulty={lesson.difficulty}
+          estimatedTime={lesson.estimatedTime}
+          xpReward={lesson.xpReward}
+        />
+
+        <div className="mt-8 grid gap-8">
+          <section className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 sm:p-8">
+            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-emerald-300">
+              Explanation
+            </p>
+            <h2 className="mt-3 text-2xl font-semibold text-white">
+              What is a variable?
+            </h2>
+            <div className="mt-5 grid gap-4 text-base leading-8 text-slate-300">
+              {lesson.explanation.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </div>
+          </section>
+
+          <VisualNoteCard {...lesson.visualNote} />
+
+          <CodeBlock
+            title={lesson.codeExample.title}
+            code={lesson.codeExample.code}
+          />
+
+          <QuizCard quiz={lesson.quiz} />
+
+          <PracticeTask
+            fillBlank={lesson.fillBlank}
+            task={lesson.practiceTask}
+          />
+
+          <section className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 sm:p-8">
+            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-emerald-300">
+              Summary
+            </p>
+            <h2 className="mt-3 text-2xl font-semibold text-white">
+              What you learned
+            </h2>
+            <ul className="mt-5 grid gap-3">
+              {lesson.summary.map((item) => (
+                <li key={item} className="flex gap-3 text-slate-300">
+                  <span className="mt-2 h-2 w-2 rounded-full bg-emerald-300" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          <LessonCompleteButton xpReward={lesson.xpReward} />
+        </div>
       </div>
-    </PageShell>
+    </main>
   );
 }
