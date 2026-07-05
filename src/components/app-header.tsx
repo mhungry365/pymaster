@@ -1,13 +1,14 @@
 import Link from "next/link";
 
 const navLinks = [
-  { href: "/dashboard", label: "Dashboard" },
-  { href: "/curriculum", label: "Curriculum" },
-  { href: "/playground", label: "Playground" },
-  { href: "/practice", label: "Practice" },
-  { href: "/projects", label: "Projects" },
-  { href: "/notes", label: "Notes" },
-  { href: "/profile", label: "Profile" },
+  { href: "/dashboard", label: "🏠 Dashboard" },
+  { href: "/games", label: "🎮 Games" },
+  { href: "/curriculum", label: "📚 Learn" },
+  { href: "/playground", label: "💻 Code" },
+  { href: "/practice", label: "🧩 Practice" },
+  { href: "/projects", label: "🚀 Projects" },
+  { href: "/notes", label: "📝 Notes" },
+  { href: "/profile", label: "📈 Progress" },
 ];
 
 export function AppHeader() {
